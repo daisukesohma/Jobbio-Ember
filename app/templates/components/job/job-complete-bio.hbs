@@ -1,0 +1,25 @@
+{{yield}}
+<!-- Starts : Complete Bio Modal -->
+<div class="new-modal-overlay modal fade" id="jobCompleteBio" tabindex="-1" role="dialog" aria-labelledby="jobCompleteBio" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button id="jobCompleteBioCloseButton" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div class="modal-header">
+        <h3>Complete Bio</h3>
+      </div>
+      <div class="modal-body">
+        <p class="lead">Please make sure your Bio is at least 60%.</p>
+        <p class="lead">Complete your bio before completing your application.</p>
+      </div>
+      <div class="modal-footer">
+        <a id="jobCompleteBioCloseCTA" data-dismiss="modal" class="btn btn--sm type--uppercase">
+          <span class="btn__text">Close</span>
+        </a>
+        <a id="jobCompleteBioEditBio" href="{{talentDashboard}}/edit" class="btn btn--sm btn--primary type--uppercase">
+          <span class="btn__text">Edit Bio</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End : Complete Bio Modal -->

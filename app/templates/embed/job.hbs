@@ -1,0 +1,14 @@
+{{outlet}}
+{{#if model}}
+  <div class="main-container">
+    {{job/job-banner model=model.job tracking=model.tracking embed=true}}
+    {{#job/job-container}}
+      {{job/job-main job=model.job embed=true}}
+    {{/job/job-container}}
+    {{job/job-location embed=true address=model.job.location.address latitude=model.job.location.latitude longitude=model.job.location.longitude}}
+    {{job/job-foot company=model.job.company embed=true model=model.job tracking=model.tracking}}
+  </div>
+  {{job/google-schema job=model.job}}
+{{else}}
+  {{common/404-page}}
+{{/if}}

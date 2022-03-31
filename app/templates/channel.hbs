@@ -1,0 +1,38 @@
+{{outlet}}
+{{#if (and (eq model.type 'company') model.company.branding_channel)}}
+  {{blocks/main-block channel=model}}
+{{else if (or (eq model.type 'channel') (eq model.type 'company'))}}
+  {{#if isTalent}}
+    {{#if (or apply embeded redirect demo channel isSearch)}}
+    {{else}}
+      {{common/front-head-talent opacity=opacity}}
+    {{/if}}
+  {{else if isCompany}}
+    {{#if (or redirect embeded demo channel isSearch)}}
+    {{else}}
+      {{common/front-head-company opacity=opacity}}
+    {{/if}}
+  {{else if isAdmin}}
+    {{#if (or redirect embeded demo channel isSearch)}}
+    {{else}}
+      {{common/front-head-admin opacity=opacity}}
+    {{/if}}
+  {{else if (or embeded isTalentRegister redirect demo channel isSearch)}}
+  {{else if isProductOffering}}
+    {{common/front-head-product opacity=opacity}}
+  {{else}}
+    {{common/front-head opacity=opacity customCss=customCss}}
+  {{/if}}
+  <div class="main-container">
+    {{channel/channel-banner channel=model}}
+    {{#channel/channel-container}}
+      {{channel/channel-sidebar channel=model}}
+      {{channel/channel-feed channel=model}}
+      {{channel/channel-details channel=model}}
+    {{/channel/channel-container}}
+    {{common/front-footer}}
+  </div>
+  {{common/add-job-alert}}
+{{else}}
+  {{common/404-page}}
+{{/if}}

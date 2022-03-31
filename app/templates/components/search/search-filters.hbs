@@ -1,0 +1,54 @@
+<div class="search-filters" style="padding-top: 15px;">
+  <form id="filterForm" class="row">
+    <div class="col-lg-1 col-sm-12 filter-text text-center" style="">
+      <p style=""
+         class="type--uppercase filter-text"
+      >
+        Filter Results
+      </p>
+    </div>
+    <div class="col-lg-2 col-sm-12" {{on-click-outside (action "closeContract")}}>
+      <button style="width: 100%;border-radius: 50px;background-color: #F1F1F1;" onclick={{action 'contractFilter'}} class="btn type--uppercase">
+        Contract Type
+      </button>
+      <div class="feature feature-1 search-filter boxed boxed--border" id="contractFilter" style="display: none; margin-top: 10px;">
+        <div class="checkbox-wrapper">
+          <div class="input-checkbox col-12">
+            <input id="search_contract_type_all" type="checkbox" name="search_contract_type"
+                   value="all" {{action 'setFilter' 'all' 'contract' on='change'}}
+                   checked={{lt selected_contracts.length 1}}>
+            <label for="search_contract_type_all"></label>
+            <span>All</span>
+          </div>
+          {{#each form.contracts as |contract|}}
+            <div class="input-checkbox col-12">
+              <input id="search_contract_type_{{contract}}" type="checkbox" name="search_contract_type"
+                     value="{{contract}}" {{action 'setFilter' contract 'contract' on='change'}}
+                     checked={{array-contains selected_contracts contract}}>
+              <label for="search_contract_type_{{contract}}"></label>
+              <span>{{capitalize contract}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-12" {{on-click-outside (action "closePosted")}}>
+      <button style="width: 100%;border-radius: 50px;background-color: #F1F1F1;" onclick={{action 'postedFilter'}} class="btn type--uppercase">
+        Date Posted
+      </button>
+      <div class="feature feature-1 search-filter boxed boxed--border" id="postedFilter" style="display: none; margin-top: 10px;">
+        <div class="radio-wrapper">
+          {{#each date_posted as |date|}}
+            <div class="input-radio col-12">
+              <input id="search_date_posted_type_{{date.value}}" type="radio" name="search_date_posted_type"
+                     value="{{date.value}}" {{action 'setFilter' date.value 'date_posted' on='change'}}
+                     checked={{array-contains selected_posted_date date.value}}>
+              <label for="search_date_posted_type_{{date.value}}"></label>
+              <span>{{capitalize date.name}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

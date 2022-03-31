@@ -1,0 +1,54 @@
+{{yield}}
+<div class="height-100 col-lg-5 col-md-6 leftcol text-center">
+  {{#if (eq model.source 'tw')}}
+    <img src="{{model.tw}}" class="">
+  {{/if}}
+  {{#if (eq model.source 'cw')}}
+    <img src="{{model.cw}}" class="">
+  {{/if}}
+  {{#if (eq model.source 'da')}}
+    <img src="{{model.da}}" class="">
+  {{/if}}
+  {{#if model.job}}
+    {{common/company-logo company=model.job.company}}
+    <h4>{{model.job.title}}</h4>
+    <div class="imagebg mb--2">
+      <ul class="list-inline">
+        <li><i class="icon icon--sm icon-Suitcase"></i>{{model.job.company.name}}</li>
+        {{#if model.job.salary_disclosed}}
+          <li><i class="icon icon--sm icon-Coins"></i>{{salary}}</li>
+        {{/if}}
+        <li><i class="icon icon--sm icon-Map-Marker"></i>{{model.job.location.country}}</li>
+      </ul>
+    </div>
+    <div class="job-details text-left">
+      <div class="moredetails">
+        {{#if simpleDescription}}
+          <p class="lead">{{{model.job.description}}}</p>
+        {{else}}
+          <p class="lead">{{{model.job.description}}}</p>
+        {{/if}}
+      </div>
+      {{#if longDescription}}
+        <div class="mt--2 text-center">
+          <a id="registerTalentLeftPanelExpand" class="btn v2 btn--sm" href="javascript:void(0)" {{action 'expandDescription'}}>
+            <span class="btn__text">{{toggleDescription}} Job Details</span>
+          </a>
+        </div>
+      {{/if}}
+    </div>
+  {{else}}
+    <h1>
+      Sign up now
+    </h1>
+    <p class="lead">
+      Jobbio is a hiring platform that connects great talent like you with great companies quickly, directly and privately. You’re more than a resume. You’re an ever evolving, multi-dimensional dream hire - and with Jobbio you can show potential
+      employers what you’re made of. What are you waiting for? Get started now!
+    </p>
+    <div class="mt--2">
+      {{#link-to "user.login" id="registerTalentLeftPanelLogIn" class="btn v2 btn--sm" }}
+        <span class="btn__text">I already have a Jobbio account</span>
+      {{/link-to}}
+    </div>
+  {{/if}}
+</div>

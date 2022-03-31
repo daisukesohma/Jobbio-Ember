@@ -1,0 +1,44 @@
+{{#if panels}}
+  {{#each panels as |panel|}}
+    {{#if panel.layoutType}}
+      <section class="imageblock switchable height-60 bg--secondary">
+        <div class="imageblock__content col-md-6 col-sm-4 pos-right">
+          {{#if panel.content.video}}
+            <iframe width="100%" height="100%" src="{{{panel.content.video}}}" allowfullscreen="allowfullscreen" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+          {{else if panel.content.image}}
+            <div class="background-image-holder" style="background: url('{{panel.content.image}}'); opacity: 1;"></div>
+          {{/if}}
+        </div>
+        <div class="container panel-text pos-vertical-center">
+          <div class="row">
+            <div class="col-md-5 col-sm-7" style="float: right">
+              <h2>{{panel.content.title}}</h2>
+              <p>{{{panel.content.text}}}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    {{else}}
+      <section class="imageblock  height-60 bg--secondary">
+        <div class="imageblock__content col-md-6 col-sm-4 pos-right">
+          {{#if panel.content.video}}
+            <iframe width="100%" height="100%" src="{{{panel.content.video}}}" allowfullscreen="allowfullscreen" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+          {{else if panel.content.image}}
+            <div class="background-image-holder" style="background: url('{{panel.content.image}}'); opacity: 1;"></div>
+          {{/if}}
+        </div>
+        <div class="container panel-text pos-vertical-center">
+          <div class="row">
+            <div class="col-md-5 col-sm-7">
+              <h2>{{panel.content.title}}</h2>
+              <p>{{{panel.content.text}}}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    {{/if}}
+  {{/each}}
+{{else}}
+  {{!-- No panel uploaded --}}
+{{/if}}
+{{yield}}

@@ -1,0 +1,187 @@
+{{outlet}}
+{{!-- header --}}
+<div class="nav-container top-nav talent-registration-v2-bar">
+  <nav id="menu1" class="bar bar-1">
+    <div class="container text-center-xs">
+      <div class="row">
+        <div class="col-lg-1 col-md-2">
+          {{#link-to "channel" model.job.company.slug}}
+            {{common/company-logo company=model.job.company}}
+          {{/link-to}}
+        </div>
+        <div class="col-lg-11 col-md-10 text-right text-center-xs text-center-sm">
+          <h4>{{model.job.title}}</h4>
+          <div class="imagebg">
+            <ul class="list-inline">
+              <li><i class="icon icon--sm icon-Suitcase"></i>{{model.job.company.name}}</li>
+              {{#if model.job.salary_disclosed}}
+                <li><i class="icon icon--sm icon-Coins"></i>{{salary}}</li>
+              {{/if}}
+              <li><i class="icon icon--sm icon-Map-Marker"></i>{{model.job.location.country}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+{{!-- main container --}}
+<style type="text/css">
+  body {
+    background-color: #f8f8f8;
+  }
+</style>
+<div class="main-container fixed-data-overlay">
+  <div class="container talent-registration v2">
+    <div class="row mt--1 sticky-sidebars">
+      {{!-- Starts : left column --}}
+      <div class="col-md-6 leftcol">
+        <div class="boxed">
+          <div class="job-details text-left">
+            {{{model.job.description}}}
+          </div>
+        </div>
+      </div>
+      {{!-- End : left column --}}
+      {{!-- Starts : right column --}}
+      <div class="col-md-6 rightcol sticky-sidebar-rightcol-off">
+        {{#sticky-container options=myStickyOptions}}
+          <div class="sidebar__inner-off">
+            <form {{action "submit" post on="submit"}} class="registrationForm" id="registrationForm">
+              <!-- starts : box1 -->
+              <div class="boxed boxed--lg bg--white boxed-form" style="margin-top:0;">
+                <h3>{{model.job.company.name}} Application</h3>
+                <p>{{model.job.company.name}} uses Jobbio to make it easier for you to apply for their roles.</p>
+                {{!-- start: questions --}}
+                <div class="row norowmargin">
+                  <div class="questions col-12">
+                    {{#if questions}}
+                      <h3>Application Questions</h3>
+                      <hr class="short">
+                      {{#each questions as |question index|}}
+                        <div class="question">
+                          <label>
+                            <i class="icon icon--sm icon-Right-2"></i>
+                            <span>Question {{sum index 1}}</span> - {{{question.text}}}
+                          </label>
+                          {{#if (eq question.type 'text')}}
+                            {{textarea id=question.id name=question.id placeholder='Answer' value=question.answer class='form-control' rows='5'}}
+                          {{else if (eq question.type 'single_select')}}
+                            <div class="input-select select-question">
+                              <select name="{{question.id}}[single]">
+                                <option value="">Select An Option</option>
+                                {{#each question.options as |option|}}
+                                  <option value="{{option.id}}">{{option.text}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                          {{else if (eq question.type 'multi_select')}}
+                            <div class="checkbox-question">
+                              {{#each question.options as |option|}}
+                                <div class="row norowmargin">
+                                  <div class="col-12 col-sm-12">
+                                    <div class="input-checkbox">
+                                      <input id="{{question.id}}_{{option.id}}" name="{{question.id}}[multi]" value="{{option.id}}" type="checkbox">
+                                      <label for="{{question.id}}_{{option.id}}">
+                                        <span class="input__label">{{option.text}}</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              {{/each}}
+                            </div>
+                          {{else if (eq question.type 'range')}}
+                            <div class="input-range row range-question">
+                              {{#each question.options as |option|}}
+                                <div class="col-3 col-sm-2 text-left price">{{option.value_from}}</div>
+                                <div class="col-6 col-sm-8" style="margin-top: 15px">
+                                  {{range-slider
+                                    value=option.value
+                                    min=option.value_from
+                                    max=option.value_to
+                                    immediateResponse=true
+                                  }}
+                                  <input id="{{question.id}}_from" name="{{question.id}}['value_from']" value={{option.value.firstObject}} hidden>
+                                  <input id="{{question.id}}_to" name="{{question.id}}['value_to']" value={{option.value.lastObject}} hidden>
+                                </div>
+                                <div class="col-3 col-sm-2 text-right price">{{option.value_to}}</div>
+                              {{/each}}
+                            </div>
+                          {{else if (eq question.type 'slider')}}
+                            <div class="input-range row slider-question">
+                              {{#each question.options as |option|}}
+                                <div class="col-3 col-sm-2 text-left price">{{option.value_from}}</div>
+                                <div class="col-6 col-sm-8" style="margin-top: 15px">
+                                  {{ui-slider
+                                    value=option.value
+                                    min=option.value_from
+                                    max=option.value_to
+                                    immediateResponse=true
+                                  }}
+                                  <input id={{question.id}} name="{{question.id}}['value']" value={{option.value}} hidden>
+                                </div>
+                                <div class="col-3 col-sm-2 text-right price">{{option.value_to}}</div>
+                              {{/each}}
+                            </div>
+                          {{else}}
+                            <div class="row norowmargin bool-question">
+                              <div class="col-4 col-sm-3">
+                                <div class="input-radio">
+                                  <input type="radio" name="{{question.id}}['{{question.type}}']" id="{{question.id}}_on" value="on" checked>
+                                  <label for="{{question.id}}_on">
+                                    <span class="input__label">
+                                      {{#if (eq question.type 'bool_yn')}}Yes{{else}}True{{/if}}
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-4 col-sm-3">
+                                <div class="input-radio">
+                                  <input type="radio" name="{{question.id}}['{{question.type}}']" id="{{question.id}}_off" value="off">
+                                  <label for="{{question.id}}_off">
+                                    <span class="input__label">
+                                      {{#if (eq question.type 'bool_yn')}}No{{else}}False{{/if}}
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          {{/if}}
+                        </div>
+                      {{/each}}
+                    {{/if}}
+                    <small class="validation-error-message" style="display: none">
+                      Please answer all the questions before submitting your application
+                    </small>
+                  </div>
+                </div>
+                {{!-- end: questions --}}
+                {{#if applying}}
+                  <div class="row norowmargin">
+                    <div class="col-12">
+                      {{paper-progress-linear}}
+                    </div>
+                  </div>
+                {{else}}
+                  {{#unless (or (eq model.job.application_status 'submitted') (eq model.job.application_status 'pending'))}}
+                    <div class="row norowmargin">
+                      <div class="col-12">
+                        <button id="submitApplication" type="submit" class="mt--1 btn btn--primary" style="display: inline-block;">
+                          Submit My Application
+                        </button>
+                      </div>
+                    </div>
+                  {{/unless}}
+                {{/if}}
+              </div>
+              <!-- end : box -->
+            </form>
+          </div>
+        {{/sticky-container}}
+      </div>
+      {{!-- End : right column --}}
+    </div>
+  </div>
+</div>
+{{job/job-application-complete job=model.job}}
+{{job/job-complete-bio-pending job=model.job}}

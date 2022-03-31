@@ -1,0 +1,24 @@
+{{yield}}
+<style>
+  #section-{{object.id}} .ember-cli-g-map {
+    height: 1064px;
+  }
+</style>
+<section class="imageblock feature-large space--lg bg--primary" style="{{style}}" id="section-{{object.id}}">
+  <div class="imageblock__content col-lg-6 col-md-4 col-12 pos-right">
+    <div class="map-container">
+      {{g-maps name="my-map" lat=object.location.latitude lng=object.location.longitude zoom=16 markers=markers scrollwheel=false}}
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-md-7">
+        <img src="{{imageLink}}{{object.image}}">
+        <h2 style="color: {{object.text_color}}">{{object.title}}</h2>
+        <h3 style="color: {{object.text_color}}">{{full_address}}</h3>
+        <hr class="short" style="border-color: #fff">
+        <p class="lead" style="color: {{object.text_color}}">{{object.text}}</p>
+      </div>
+    </div>
+  </div>
+</section>

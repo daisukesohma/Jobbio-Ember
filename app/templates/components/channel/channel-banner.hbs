@@ -1,0 +1,35 @@
+<section class="imagebg text-center channel-banner" data-overlay="8">
+  <div class="background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1;">
+    <img alt="background" src="{{{backgroundImage}}}">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="wrap">{{title}}</h1>
+        <h5 class="wrap">{{caption}}</h5>
+        {{scroll-to afterScroll="scrollToClicked" href='#jobs-list' offset=-60 label='VIEW JOBS' id="channelBannerViewJobsButton" class="btn btn--sm btn--primary type--uppercase mt--1"}}
+        {{#unless isAdmin}}
+          {{#if isNotCompanyMember}}
+            {{#unless (eq channel.company.status "frozen")}}
+              {{#if session.isAuthenticated}}
+                {{#if channel.is_following}}
+                  <a id="channelBannerUnfollowButton" class="btn btn--sm type--uppercase mt--1" href="javascript:void(0)" onclick={{ action "unfollow" channel.id}}>
+                    <span class="btn__text">Unfollow</span>
+                  </a>
+                {{else}}
+                  <a id="channelBannerFollowButton" class="btn btn--sm type--uppercase mt--1" href="javascript:void(0)" onclick={{ action "follow" channel.id}}>
+                    <span class="btn__text">Follow</span>
+                  </a>
+                {{/if}}
+              {{else}}
+                {{#link-to 'talent.register' (query-params channel=channel.slug job=null company=null ccuid=null source=channel.slug) id="channelBannerFollowCTA" class="btn btn--sm type--uppercase mt--1"}}
+                  <span class="btn__text">Follow</span>
+                {{/link-to}}
+              {{/if}}
+            {{/unless}}
+          {{/if}}
+        {{/unless}}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+<div class="{{cssPrefix}}{{if embed 'col-md-12' 'col-md-6'}} mt-5 mb-4 mt-md-0 mb-md-0 {{cssPrefix}}middlecol">
+  <h4>Job Details</h4>
+  <div class="{{cssPrefix}}section">
+    <div class="{{cssPrefix}}job-cards">
+      <!-- Starts: row -->
+      <div class="row boxed boxed--border post post-text" style="margin-top: 0;">
+        <p>{{{job.description}}}</p>
+      </div>
+      <!-- End: row -->
+      {{#if job.content}}
+        {{#each job.content as |content|}}
+          {{job/job-content content=content prefixCSS=prefixCSS}}
+        {{/each}}
+      {{/if}}
+      {{job/job-skills job=job}}
+    </div>
+  </div>
+</div>
+{{yield}}

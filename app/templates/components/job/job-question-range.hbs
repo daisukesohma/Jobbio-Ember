@@ -1,0 +1,20 @@
+<div class="row question range-question">
+  <div class="col-12 col-sm-12">
+    <h4>{{question.text}}</h4>
+  </div>
+  <div class="col-12 col-sm-12">
+    <div class="row">
+      <div class="col-3 col-sm-1 value-from">
+        {{range.value_from}}
+      </div>
+      <div class="col-6 col-sm-10">
+        {{range-slider value=value min=range.value_from max=range.value_to}}
+        <input id="{{question.id}}_from" name="{{question.id}}['value_from']" value={{value_from}} hidden>
+        <input id="{{question.id}}_to" name="{{question.id}}['value_to']" value={{value_to}} hidden>
+      </div>
+      <div class="col-3 col-sm-1 value-to">
+        {{range.value_to}}
+      </div>
+    </div>
+  </div>
+</div>

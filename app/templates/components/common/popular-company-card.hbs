@@ -1,0 +1,27 @@
+<div class="col-md-4 tiles-v1">
+  <div class="feature feature-1">
+    {{common/common-card-image company=company popular=true}}
+    <div class="feature__body boxed boxed--border featured-cards">
+      <div class="s-logo">
+        {{common/company-logo company=company}}
+      </div>
+      <h4>{{company.name}}</h4>
+      <ul style="text-align:left;">
+        {{#each company.cards as |card|}}
+          <li>
+            <i class="fa {{card.icon}}" aria-hidden="true"></i>
+            {{card.text}}
+          </li>
+        {{/each}}
+      </ul>
+      <a class="btn btn--primary" style="background-color: {{linkColor}}; border-color: {{linkColor}}" href="{{link}}/{{company.slug}}">
+        {{#if (eq company.live_jobs 0)}}
+          <span class="btn__text">View Channel</span>
+        {{else}}
+          <span class="btn__text">View {{company.live_jobs}} Job{{if (not-eq company.live_jobs 1) "s"}}</span>
+        {{/if}}
+      </a>
+    </div>
+  </div>
+</div>
+{{yield}}

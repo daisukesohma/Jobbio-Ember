@@ -1,0 +1,13 @@
+<div class="logo">
+  {{#if company.image_logo}}
+    {{#link-to 'channel' company.slug}}
+      <img class="img-circle" src="{{{company.image_logo}}}">
+    {{/link-to}}
+  {{else}}
+    {{#link-to 'channel' company.slug}}
+      <h2 style="background-color: #ff4f4f;color: #fff" class="{{cssPrefix}}img-circle">
+        {{initial}}
+      </h2>
+    {{/link-to}}
+  {{/if}}
+</div>

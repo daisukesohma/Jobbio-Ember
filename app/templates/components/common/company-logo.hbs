@@ -1,0 +1,10 @@
+{{#if hasLogo}}
+  <img class="logo img-rounded" src="{{company.image_logo}}">
+{{else}}
+  <div class="{{cssPrefix}}logo {{cssPrefix}}img-rounded" style="{{brandColor}}">
+    <div class="{{cssPrefix}}initials">
+      {{initials}}
+    </div>
+  </div>
+{{/if}}
+{{yield}}

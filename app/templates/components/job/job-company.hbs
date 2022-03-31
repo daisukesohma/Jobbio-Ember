@@ -1,0 +1,87 @@
+<div class="{{cssPrefix}}col-md-3 mt-5 mt-md-0 {{cssPrefix}}col-md-push-9 {{cssPrefix}}rightcol {{cssPrefix}}sticky-sidebar-rightcol">
+  {{#if model.location.longitude}}
+    {{#sticky-container options=myStickyOptionsLocation}}
+      <div class="{{cssPrefix}}sidebar__inner">
+        <div class="{{cssPrefix}}jobs">
+          <div class="{{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}text-center">
+            {{job/job-company-logo company=model.company prefixCSS=prefixCSS}}
+            <h4 class="{{cssPrefix}}unmarg">{{model.company.name}}</h4>
+            <p>{{model.company.location.address}}</p>
+            <div class="buttons">
+              {{#if applying}}
+                {{paper-progress-linear}}
+              {{else}}
+                {{#each buttons as |button|}}
+                  {{#if (eq button.type 'default')}}
+                    <a id="{{button.id}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{else if (eq button.type 'linkToApply')}}
+                    {{#link-to button.route button.param1 button.param2 (query-params channel=null job=model.id company=model.company.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                      <span class="btn__text">{{button.text}}</span>
+                    {{/link-to}}
+                  {{else if (eq button.type 'linkToRegister')}}
+                    {{#link-to button.route (query-params job=model.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                      <span class="btn__text">{{button.text}}</span>
+                    {{/link-to}}
+                  {{else if (eq button.type 'onClickAction')}}
+                    <a id="{{button.id}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{else if (eq button.type 'onClickModal')}}
+                    <a id="{{button.id}}" data-toggle="modal" data-target="#jobQuestions" class="{{button.class}}">
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{/if}}
+                {{/each}}
+              {{/if}}
+              {{yield}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/sticky-container}}
+  {{else}}
+    {{#sticky-container options=myStickyOptions}}
+      <div class="{{cssPrefix}}sidebar__inner">
+        <div class="{{cssPrefix}}jobs">
+          <div class="{{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}text-center">
+            {{job/job-company-logo company=model.company prefixCSS=prefixCSS}}
+            <h4 class="{{cssPrefix}}unmarg">{{model.company.name}}</h4>
+            <p>{{model.company.location.address}}</p>
+            <div class="buttons">
+              {{#if applying}}
+                {{paper-progress-linear}}
+              {{else}}
+                {{#each bottomButtons as |button|}}
+                  {{#if (eq button.type 'default')}}
+                    <a id="{{button.buttonID}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{else if (eq button.type 'linkToApply')}}
+                    {{#link-to button.route button.param1 button.param2 (query-params channel=null job=model.id company=model.company.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                      <span class="btn__text">{{button.text}}</span>
+                    {{/link-to}}
+                  {{else if (eq button.type 'linkToRegister')}}
+                    {{#link-to button.route (query-params job=model.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                      <span class="btn__text">{{button.text}}</span>
+                    {{/link-to}}
+                  {{else if (eq button.type 'onClickAction')}}
+                    <a id="{{button.buttonID}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{else if (eq button.type 'onClickModal')}}
+                    <a id="{{button.buttonID}}" data-toggle="modal" data-target="#jobQuestions" class="{{button.class}}">
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{/if}}
+                {{/each}}
+              {{/if}}
+              {{yield}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/sticky-container}}
+  {{/if}}
+</div>

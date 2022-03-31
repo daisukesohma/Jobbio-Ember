@@ -1,0 +1,22 @@
+{{#if testimonials}}
+  <section class="{{cssPrefix}}text-center">
+    <div class="{{cssPrefix}}container">
+      <div class="{{cssPrefix}}row">
+        <div class="col-md-8 col-sm-10">
+          {{#swiper-container options=myOptions}}
+            {{#each testimonials as |testimonial|}}
+              {{#swiper-slide}}
+                <div class="testimonial">
+                  <blockquote>{{{testimonial.content.text}}}</blockquote>
+                  <h5>{{testimonial.content.title}}</h5>
+                  <span>{{testimonial.content.detail}}</span>
+                </div>
+              {{/swiper-slide}}
+            {{/each}}
+          {{/swiper-container}}
+        </div>
+      </div>
+    </div>
+  </section>
+{{/if}}
+{{yield}}

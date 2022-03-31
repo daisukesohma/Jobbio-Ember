@@ -1,0 +1,30 @@
+{{yield}}
+<section class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8">
+        <h1>A Few Of Our Partners</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="text-center">
+  <div class="container">
+    <div class="row">
+      {{#swiper-container options=myOptions}}
+        {{#each brands1 as |brand|}}
+          {{#swiper-slide}}
+            <img alt="Image" class="image--md partnership-image" src="{{brand.url}}">
+          {{/swiper-slide}}
+        {{/each}}
+      {{/swiper-container}}
+      {{#swiper-container options=myOptions}}
+        {{#each brands2 as |brand|}}
+          {{#swiper-slide}}
+            <img alt="Image" class="image--md partnership-image" src="{{brand.url}}">
+          {{/swiper-slide}}
+        {{/each}}
+      {{/swiper-container}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<div class="col-md-3 col-md-pull-9 leftcol sticky-sidebar-leftcol">
+  {{#sticky-container options=myStickyOptions }}
+    <div class="sidebar__inner">
+      <div class="section">
+        <h4>Companies</h4>
+        <div class="feature feature-1 boxed boxed--border popularcompanies">
+          {{#if objects}}
+            {{#each objects as |company|}}
+              <!-- Starts: row -->
+              {{common/company-list-item company=company}}
+              <!-- End: row -->
+            {{/each}}
+            {{#if hasMore}}
+              {{#infinity-loader
+                    infinityModel=objects
+                    infinityLoad=(action "loadMore")
+                    hideOnInfinity=true}}
+                {{spinkit-circle}}
+              {{/infinity-loader}}
+            {{/if}}
+          {{else}}
+            <div class="row">
+              {{#if isLoading}}
+                {{spinkit-circle}}
+              {{else}}
+                <span class="col-12 empty-sidebar">
+                  <h4>This channel has no companies yet</h4>
+                </span>
+              {{/if}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  {{/sticky-container}}
+</div>

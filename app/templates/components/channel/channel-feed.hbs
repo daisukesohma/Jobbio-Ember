@@ -1,0 +1,10 @@
+{{#if isTopicChannel}}
+  <div class="{{cssPrefix}}col-md-6 mb-5 pb-3 {{cssPrefix}}middlecol">
+    {{channel/channel-feed-section channel=channel items=objects item=item embed=embed prefixCSS=prefixCSS}}
+  </div>
+{{else}}
+  <div class="{{cssPrefix}}col-md-9 mb-5 pb-3 col-md-pull-3 {{cssPrefix}}middlecol" id="jobs-list">
+    {{channel/channel-feed-section channel=channel items=objects item=item embed=embed prefixCSS=prefixCSS}}
+  </div>
+{{/if}}
+{{yield}}

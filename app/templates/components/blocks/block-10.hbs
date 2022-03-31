@@ -1,0 +1,46 @@
+{{yield}}
+<section class="unpad" id="section-{{object.id}}" style="{{style}}">
+  <div class="masonry masonry--gapless">
+    <div class="masonry__container masonry--active" style="position: relative; min-height: 500.5px;">
+      {{#each gallery as |image|}}
+        {{#if image.layoutType}}
+          <div class="masonry__item col-lg-4 col-md-6 col-12 filter-lounge">
+            <div class="project-thumb hover-element height-50">
+              <a href="javascript:;">
+                <div class="hover-element__initial">
+                  <div class="background-image-holder" style="background: url('{{imageLink}}{{image.image}}'); opacity: 1;">
+                    <img alt="background" src="{{imageLink}}{{image.image}}">
+                  </div>
+                </div>
+                <div class="hover-element__reveal" data-overlay="9">
+                  <div class="project-thumb__title">
+                    <h5>{{image.title}}</h5>
+                    <span>{{image.subtitle}}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {{else}}
+          <div class="masonry__item col-lg-8 col-md-6 col-12 filter-front-desk">
+            <div class="project-thumb hover-element height-50">
+              <a href="javascript:;">
+                <div class="hover-element__initial">
+                  <div class="background-image-holder" style="background: url('{{imageLink}}{{image.image}}'); opacity: 1;">
+                    <img alt="background" src="{{imageLink}}{{image.image}}">
+                  </div>
+                </div>
+                <div class="hover-element__reveal" data-overlay="9">
+                  <div class="project-thumb__title">
+                    <h5>{{image.title}}</h5>
+                    <span>{{image.subtitle}}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</section>

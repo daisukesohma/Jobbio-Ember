@@ -1,0 +1,16 @@
+{{yield}}
+<section class="video video-1 text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="modal-instance">
+          <div class="video-play-icon video-play-icon--sm modal-trigger box-shadow"></div>
+          <div class="modal-container">
+            <div class="modal-content bg-dark" data-width="60%" data-height="60%"> <iframe data-src="{{object.video}}" allowfullscreen="allowfullscreen"></iframe> </div>
+          </div>
+        </div>
+        <h2 style="color: {{object.text_color}}">{{object.title}} </h2>
+      </div>
+    </div>
+  </div>
+</section>

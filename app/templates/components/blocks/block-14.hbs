@@ -1,0 +1,36 @@
+{{yield}}
+<style>
+  #section-{{object.id}} .tabs li.active .tab__title span {
+    color: {{object.primary_color}};
+  }
+</style>
+<section class="text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="tabs-container mt--2" data-content-align="left">
+          <ul class="tabs tabs--spaced">
+            {{#each object.block_content_entry as |entry index|}}
+              <li class="{{if (eq index 0) 'active'}}" id="list{{index}}">
+                <div class="tab__title">
+                  <span class="h5">
+                    <p>{{entry.title}}</p>
+                  </span>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+          <ul class="tabs-content tab-content">
+            {{#each object.block_content_entry as |entry index|}}
+              <li class="{{if (eq index 0) 'active in'}}">
+                <div class="tab__content">
+                  <p class="lead">{{entry.text}}</p>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

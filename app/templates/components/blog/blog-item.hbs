@@ -1,0 +1,18 @@
+<div class="col-md-4 tiles-v1">
+  <div class="feature feature-1">
+    <a href="{{post.link}}" target="_blank">
+      <img alt="Image" class="featured-image-cover" src="{{post.image}}">
+    </a>
+    <div class="feature__body boxed boxed--border featured-cards blog-entry">
+      <p style="text-align: left">{{moment-format post.posted_at 'Do MMM YYYY'}}</p>
+      <h4 class="blog-title">{{post.title}}</h4>
+      <p class="blog-text">
+        {{post.text}}
+      </p>
+      <a class="" style="float: left" href="{{post.link}}" target="_blank">
+        Read More
+      </a>
+    </div>
+  </div>
+</div>
+{{yield}}

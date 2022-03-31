@@ -1,0 +1,10 @@
+{{outlet}}
+{{#if model}}
+  <div class="main-container">
+    {{#channel/channel-container}}
+      {{embed/embed-jobs channel=model embed=true}}
+    {{/channel/channel-container}}
+  </div>
+{{else}}
+  {{common/404-page}}
+{{/if}}

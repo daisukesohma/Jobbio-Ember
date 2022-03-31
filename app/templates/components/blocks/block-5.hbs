@@ -1,0 +1,27 @@
+{{yield}}
+<section class="text-center bg--primary unpad--top" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row justify-content-around">
+      {{#each object.block_content_entry as |entry index|}}
+        <style>
+          #section-{{object.id}} .customPrimaryButton{{index}} {
+            color: {{entry.primary_color}} !important;
+          }
+        </style>
+        <div class="col-md-4">
+          <div class="feature feature-3 boxed boxed--lg boxed--border"> <i class="icon icon--lg {{entry.icon}}"></i>
+            <h4>{{entry.title}}</h4>
+            <p>{{entry.text}}</p>
+            {{#if (contains entry.primary_cta_link 'section-')}}
+              {{scroll-to href=(concat '#' entry.primary_cta_link) label=entry.primary_cta_text class=(concat "customPrimaryButton" index)}}
+            {{else}}
+              <a class="customPrimaryButton{{index}}" href="{{entry.primary_cta_link}}" target="_blank">
+                {{entry.primary_cta_text}}
+              </a>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

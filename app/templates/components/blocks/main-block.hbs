@@ -1,0 +1,40 @@
+{{yield}}
+{{blocks/nav-container channel=channel}}
+{{#each objects as |object|}}
+  {{#if (eq object.block.id 1)}}
+    {{blocks/block-1 object=object channel=channel}}
+  {{else if (eq object.block.id 2)}}
+    {{blocks/block-2 object=object channel=channel}}
+  {{else if (eq object.block.id 3)}}
+    {{blocks/block-3 object=object channel=channel}}
+  {{else if (eq object.block.id 4)}}
+    {{blocks/block-4 object=object channel=channel}}
+  {{else if (eq object.block.id 5)}}
+    {{blocks/block-5 object=object channel=channel}}
+  {{else if (eq object.block.id 6)}}
+    {{blocks/block-6 object=object channel=channel}}
+  {{else if (eq object.block.id 7)}}
+    {{blocks/block-7 object=object channel=channel}}
+  {{else if (eq object.block.id 8)}}
+    {{blocks/block-8 object=object channel=channel}}
+  {{else if (eq object.block.id 9)}}
+    {{blocks/block-9 object=object channel=channel}}
+  {{else if (eq object.block.id 10)}}
+    {{blocks/block-10 object=object channel=channel}}
+  {{else if (eq object.block.id 11)}}
+    {{blocks/block-11 object=object channel=channel}}
+  {{else if (eq object.block.id 12)}}
+    {{blocks/block-12 object=object channel=channel}}
+  {{else if (eq object.block.id 13)}}
+    {{blocks/block-13 object=object channel=channel}}
+  {{else if (eq object.block.id 14)}}
+    {{blocks/block-14 object=object channel=channel}}
+  {{else if (eq object.block.id 15)}}
+    {{blocks/block-15 object=object channel=channel}}
+  {{else if (eq object.block.id 16)}}
+    {{blocks/block-16 object=object channel=channel}}
+  {{else if (eq object.block.id 17)}}
+    {{blocks/block-17 object=object channel=channel}}
+  {{/if}}
+{{/each}}
+{{blocks/block-footer}}

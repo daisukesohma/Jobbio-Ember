@@ -1,0 +1,49 @@
+<section style="padding-top:60px;padding-bottom:40px" class="search-bar">
+  <div class="container">
+    <form class="form--horizontal">
+      <div class="row">
+        <div class="col-lg-5">{{input id='title' placeholder='Search Job Title or Company' value=keywords}}</div>
+        <div class="col-lg-4">
+          {{#power-select
+                  options=predictions
+                  id='locationSearch'
+                  allowClear=true
+                  placeholder="Search Location"
+                  search=(action 'searchLocations')
+                  selected=selected
+                  onchange=(action (mut selected))
+          as |location|
+          }}
+            {{#if location.searchUrl}}
+              {{location.city}}, {{location.country}}
+            {{else}}
+              {{location.description}}
+            {{/if}}
+          {{/power-select}}
+        </div>
+        <div class="col-lg-3">
+          {{#if jobs}}
+            {{#link-to 'search.results' (query-params search=keywords location=location trk=trk) id="searchBarResults"}}
+              <button type="submit" class="btn btn--primary type--uppercase">Search</button>
+            {{/link-to}}
+          {{else}}
+            {{#link-to 'search.companies' (query-params search=keywords location=location trk=trk) id="searchBarResults"}}
+              <button type="submit" class="btn btn--primary type--uppercase">Search</button>
+            {{/link-to}}
+          {{/if}}
+        </div>
+
+      </div>
+      {{#if jobs}}
+        {{search/search-filters
+                showFilters=showFilters
+                model=model
+                selectedJob=selectedJob
+                jobs=jobs}}
+      {{/if}}
+    </form>
+  </div>
+</section>
+
+
+{{yield}}

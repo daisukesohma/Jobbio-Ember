@@ -1,0 +1,96 @@
+<div class="{{cssPrefix}}col-md-3 mt-n5 t-md-0 {{cssPrefix}}col-md-pull-9 {{cssPrefix}}leftcol {{cssPrefix}}sticky-sidebar-leftcol">
+  {{#if job.location.longitude}}
+    {{#sticky-container options=myStickyOptionsLocation }}
+      <div class="{{cssPrefix}}sidebar__inner">
+        <div class="{{cssPrefix}}section">
+          <h4>{{title}}</h4>
+          <div class="{{cssPrefix}}feature {{cssPrefix}}feature-1 {{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}popularcompanies">
+            {{#each jobs as |job|}}
+              <!-- Starts: row -->
+              {{#if embed}}
+                <a id="jobOther{{job.id}}CTA" href="{{link}}/companies/{{job.company.slug}}/jobs/{{job.slug}}" target="_blank" class="row">
+                  {{common/company-logo company=job.company prefixCSS=prefixCSS}}
+                  <span class="{{cssPrefix}}col-12">
+                    <span>{{job.title}}</span> <small>{{job.company.name}}</small>
+                  </span>
+                </a>
+              {{else}}
+                {{#link-to "job" job.company.slug job.slug class="row" invokeAction=(action 'jobSelected') id=(concat 'jobOther' job.id 'CTA')}}
+                  {{common/company-logo company=job.company prefixCSS=prefixCSS}}
+                  <span class="{{cssPrefix}}col-12">
+                    <span>{{job.title}}</span> <small>{{job.company.name}}</small>
+                  </span>
+                {{/link-to}}
+              {{/if}}
+              <!-- End: row -->
+            {{else}}
+              {{#if isLoading}}
+                {{job/job-other-shimmer}}
+              {{else}}
+                <!-- Starts: row -->
+                <div class="{{cssPrefix}}row">
+                  <span class="{{cssPrefix}}col-12 empty-sidebar">
+                    <h5>{{company.name}} has not posted any more jobs.</h5>
+                  </span>
+                </div>
+                <!-- End: row -->
+              {{/if}}
+            {{/each}}
+            {{#if hasMore}}
+              {{#link-to 'channel' company.slug id='jobOtherViewMoreCTA'}}
+                <div class="{{cssPrefix}}view-more">View More</div>
+              {{/link-to}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/sticky-container}}
+  {{else}}
+    {{#sticky-container options=myStickyOptions }}
+      <div class="{{cssPrefix}}sidebar__inner">
+        <div class="{{cssPrefix}}section">
+          <h4>{{title}}</h4>
+          <div class="{{cssPrefix}}feature {{cssPrefix}}feature-1 {{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}popularcompanies">
+            {{#each jobs as |job|}}
+              <!-- Starts: row -->
+              {{#if embed}}
+                <a id="jobOther{{job.id}}CTABottom" href="{{link}}/companies/{{job.company.slug}}/jobs/{{job.slug}}" target="_blank" class="row">
+                  {{common/company-logo company=job.company prefixCSS=prefixCSS}}
+                  <span class="{{cssPrefix}}col-12">
+                    <span>{{job.title}}</span> <small>{{job.company.name}}</small>
+                  </span>
+                </a>
+              {{else}}
+                {{#link-to "job" job.company.slug job.slug class="row" invokeAction=(action 'jobSelected') id=(concat 'jobOther' job.id 'CTABottom')}}
+                  {{common/company-logo company=job.company prefixCSS=prefixCSS}}
+                  <span class="{{cssPrefix}}col-12">
+                    <span>{{job.title}}</span> <small>{{job.company.name}}</small>
+                  </span>
+                {{/link-to}}
+              {{/if}}
+              <!-- End: row -->
+            {{else}}
+              {{#if isLoading}}
+                {{job/job-other-shimmer}}
+              {{else}}
+                <!-- Starts: row -->
+                <div class="{{cssPrefix}}row">
+                  <span class="{{cssPrefix}}col-12 empty-sidebar">
+                    <h5>{{company.name}} has not posted any more jobs.</h5>
+                  </span>
+                </div>
+                <!-- End: row -->
+              {{/if}}
+            {{/each}}
+            {{#if hasMore}}
+              {{#link-to 'channel' company.slug id='jobOtherViewMoreCTABottom'}}
+                <div class="{{cssPrefix}}view-more">View More</div>
+              {{/link-to}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/sticky-container}}
+  {{/if}}
+</div>
+{{yield}}

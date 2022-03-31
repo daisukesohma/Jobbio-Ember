@@ -1,0 +1,21 @@
+{
+  "name": "jobbio-frontend",
+  "description": "Small description for jobbio-frontend goes here",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/J0BB10/frontend",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "seiyria-bootstrap-slider": "~6.0.6",
+    "jquery-validation": "^1.17.0",
+    "masonry-layout": "masonry#^4.2.2",
+    "isotope-layout": "^3.0.6"
+  }
+}

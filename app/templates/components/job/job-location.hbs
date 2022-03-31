@@ -1,0 +1,8 @@
+{{#if longitude}}
+  <section class="unpad">
+    <div class="map-container border--round">
+      {{g-maps scrollwheel=false showMapTypeControl=true zoom=13 address=address lat=latitude lng=longitude class="map-container border--round"}}
+    </div>
+  </section>
+{{/if}}
+{{yield}}

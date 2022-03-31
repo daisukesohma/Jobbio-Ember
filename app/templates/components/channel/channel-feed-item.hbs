@@ -1,0 +1,11 @@
+{{#if isJob}}
+  <!-- Starts: row -->
+  {{channel/channel-job-item item=item embed=embed job=item prefixCSS=prefixCSS channel=channel}}
+  <!-- End: row -->
+{{else}}
+  {{#if isTopicChannel}}
+    <!-- Starts: row -->
+    {{job/job-content content=item.content embed=embed items=items channel=channel item=item prefixCSS=prefixCSS}}
+    <!-- End: row -->
+  {{/if}}
+{{/if}}

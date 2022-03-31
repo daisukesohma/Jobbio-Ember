@@ -1,0 +1,19 @@
+{{outlet}}
+{{#if model}}
+  <div class="main-container">
+    {{job/job-banner model=model.job tracking=model.tracking}}
+    {{#job/job-container}}
+      {{job/job-other job=model.job company=model.job.company current_job_id=model.job.id title="Other Jobs" linkToChannel=true}}
+      {{job/job-main job=model.job}}
+      {{job/job-company model=model.job tracking=model.tracking}}
+    {{/job/job-container}}
+    {{job/job-foot company=model.job.company model=model.job tracking=model.tracking}}
+    {{job/job-complete-bio job=model.job}}
+    {{job/job-complete-bio-pending job=model.job}}
+    {{job/job-application-complete job=model.job}}
+    {{common/front-footer}}
+  </div>
+  {{job/google-schema job=model.job}}
+{{else}}
+  {{common/404-page}}
+{{/if}}

@@ -1,0 +1,54 @@
+{{yield}}
+<!-- Starts : Apply Job Modal -->
+<div class="apply-job-overlay modal fade" id="jobQuestions" tabindex="-1" role="dialog" aria-labelledby="saveJobOverlay" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div class="modal-header">
+        <h3>Job Questions</h3>
+        <p>Please answer the following questions truthfully.</p>
+      </div>
+      <div class="modal-body">
+        <div class="job-description">
+          {{{job.description}}}
+        </div>
+        <div class="job-description-toggle-btn-wrapper">
+          <a id="jobQuestionsToggleDescription" {{action 'toggleDescription'}} class="btn btn--sm job-description-toggle-btn">
+            <span class="btn__text">
+              {{#if descriptionOpened}}
+                Hide job details
+              {{else}}
+                View job details
+              {{/if}}
+            </span>
+          </a>
+        </div>
+        <form id="applicationForm">
+          {{#if job.questions}}
+            {{#each job.questions as |question|}}
+              {{job/job-question question=question application_answers=job.application_answers}}
+            {{/each}}
+          {{/if}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <small class="validation-error-message" style="display: none">Please answer all the questions before submitting your application</small>
+        {{#if applying}}
+          <a class="btn btn--primary v1 btn--sm btn-block">
+            <span class="btn__text">{{paper-progress-linear}}</span>
+          </a>
+        {{else}}
+          <a id="jobQuestionsCloseButton" {{action 'clearModal'}} data-dismiss="modal" class="btn btn--sm type--uppercase">
+            <span class="btn__text">Close</span>
+          </a>
+          <a id="jobQuestionsSubmitApplication" {{action 'submit'}} class="btn btn--sm btn--primary type--uppercase">
+            <span class="btn__text">Submit Application</span>
+          </a>
+        {{/if}}
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- End : Apply Job Modal -->

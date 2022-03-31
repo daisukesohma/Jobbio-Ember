@@ -1,0 +1,26 @@
+{{#if galleries}}
+  <section class="{{cssPrefix}}text-center">
+    <div class="{{cssPrefix}}container">
+      <div class="{{cssPrefix}}row">
+        {{#swiper-container options=myOptions}}
+          {{#each galleries as |gallery|}}
+            {{#swiper-slide}}
+              <div class="project-thumb" style="background: url('{{gallery.content.image}}') no-repeat;">
+                {{light-box href=gallery.content.image
+                  data-lightbox='name'
+                  data-title=gallery.content.title
+                  data-alt='alt'
+                  data-class='border--round'
+                }}
+              </div>
+              {{#unless (eq gallery.content.title 'undefined')}}
+                <h4>{{gallery.content.title}}</h4>
+              {{/unless}}
+            {{/swiper-slide}}
+          {{/each}}
+        {{/swiper-container}}
+      </div>
+    </div>
+  </section>
+{{/if}}
+{{yield}}

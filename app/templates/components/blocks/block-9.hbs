@@ -1,0 +1,15 @@
+{{yield}}
+<section class="text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row justify-content-around">
+      {{#each object.block_content_entry as |entry|}}
+        <div class="col-md-4">
+          <div class="feature feature-8"> <img alt="Image" src="{{imageLink}}{{entry.image}}">
+            <h5 style="color: {{object.text_color}}">{{entry.title}}</h5>
+            <span style="color: {{object.tertiary_color}}">{{entry.subtitle}}</span>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

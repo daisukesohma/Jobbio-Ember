@@ -1,0 +1,10 @@
+{{yield}}
+{{#if popular}}
+  <a href="{{link}}/{{company.slug}}">
+    <img alt="Image" class="featured-image-cover" src="{{lazyImage}}">
+  </a>
+{{else}}
+  <div class="background-image-holder" style="{{imageBackground}}">
+    <img alt="background" class="featured-image-cover" src="{{lazyImage}}">
+  </div>
+{{/if}}

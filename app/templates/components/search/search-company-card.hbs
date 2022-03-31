@@ -1,0 +1,27 @@
+<div class="col-lg-4 common-card">
+  <article class="feature feature-1 cards-min-height">
+    {{#link-to "channel" company.slug id=(concat "companyCardsSlugCTA_" company.id) class="block"}}
+      <div class="background-image-holder" style="{{imageBackground}}">
+        <img alt="background" src="{{image}}">
+      </div>
+    {{/link-to}}
+    <div class="feature__body boxed boxed--border">
+      <a id="companyCardsSlugNameCTA_{{company.id}}" href="{{link}}/{{company.slug}}" target="_blank" class="common-card-company-name">
+        <span>{{company.name}}</span>
+      </a>
+      {{#if company.location.city}}
+        <p>{{company.location.city}}, {{company.location.country}}</p>
+      {{else}}
+        <p>{{company.location.country}}</p>
+      {{/if}}
+      {{#link-to "channel" company.slug id=(concat "companyCardsSlugViewCTA_" company.id)}}
+        {{#if (eq company.live_jobs 0)}}
+          View Channel
+        {{else}}
+          View {{company.live_jobs}} Job{{if (not-eq company.live_jobs 1) "s"}}
+        {{/if}}
+      {{/link-to}}
+    </div>
+  </article>
+</div>
+{{yield}}

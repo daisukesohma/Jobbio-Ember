@@ -1,0 +1,25 @@
+{{yield}}
+<!-- Starts : Application Complete Modal -->
+<div class="new-modal-overlay modal fade" id="applicationComplete" tabindex="-1" role="dialog" aria-labelledby="applicationComplete" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button id="applicationCompleteCloseButton" type="button" class="redirect-job-page close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div class="modal-header">
+        <i class="icon icon--lg icon-Balloon"></i>
+      </div>
+      <div class="modal-body">
+        <p class="lead">Your application for <b>{{job.title}}</b> has been submitted!</p>
+        <p class="lead">Continue your search to find other jobs.</p>
+      </div>
+      <div class="modal-footer">
+        <a id="applicationCompleteCloseCTA" data-dismiss="modal" class="redirect-job-page btn btn--sm type--uppercase">
+          <span class="btn__text">Close</span>
+        </a>
+        <a id="applicationCompleteSearch" class="go-search-page btn btn--sm btn--primary type--uppercase">
+          <span class="btn__text">Search</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End : Application Complete Modal -->

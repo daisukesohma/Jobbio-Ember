@@ -1,0 +1,26 @@
+{{yield}}
+<section class="text-center bg--secondary unpad--bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-8">
+        <h1>You're In Good Company</h1>
+        <p class="lead">We attract talent for some of the biggest global brands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg--secondary unpad--top">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {{#swiper-container options=myOptions}}
+          {{#each brands as |brand|}}
+            {{#swiper-slide}}
+              <img alt="Image" class="image--s" src="{{brand.url}}">
+            {{/swiper-slide}}
+          {{/each}}
+        {{/swiper-container}}
+      </div>
+    </div>
+  </div>
+</section>

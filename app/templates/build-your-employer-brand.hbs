@@ -1,0 +1,79 @@
+{{outlet}}
+<div class="col-md-3 rightcol sticky-sidebar-rightcol">
+  <div id="ember837-sticky-wrapper" style="height: 216px;">
+    <div id="ember837" class="sticky ember-view" style="width: 262.5px;">
+      <div class="sidebar__inner">
+        <div class="section notifications">
+          <h4>Settings</h4>
+          <div class="boxed boxed--lg boxed--border">
+            <div class="text-block">
+              <ul class="menu-vertical">
+                <li>
+                  <a id="buildEmployerBrandingUpdatePassword" data-target="#password" data-toggle="modal" href="javascript:void(0)">Update Password</a>
+                </li>
+                <li>
+                  <a id="buildEmployerBrandingEmailPreferences" data-target="#emailPreference" data-toggle="modal" href="javascript:void(0)">Email Preferences</a>
+                </li>
+                <li>
+                  <a id="buildEmployerBrandingNotifications" data-target="#notifications" data-toggle="modal" href="javascript:void(0)">Notifications</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="emailPreference" tabindex="-1" role="dialog" aria-labelledby="saveJobOverlay" aria-hidden="false" class="filter-overlay modal fade in" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="buildEmployerBrandingClose" type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+        <h3>Email Preferences</h3><br>
+        <h5>Adjust your email preferences by clicking on the settings below.</h5>
+        <span style="font-size:12px; margin-top:-20px;">Service Messages, such as 'job notifications, and messages relating to your application'. Please note you cannot opt out of these messages</span>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="options filter-list-02">
+              <li>
+                <div class="input-checkbox input-checkbox--switch">
+                  <input id="checkbox-switch-0" type="checkbox" name="shortlisted">
+                  <label for="checkbox-switch-0"></label>
+                </div>
+                <span>Recommended Jobs: relevant jobs recommended for you based on your interests and skills</span>
+              </li>
+              <li>
+                <div class="input-checkbox input-checkbox--switch">
+                  <input id="checkbox-switch-1" type="checkbox" name="shortlisted">
+                  <label for="checkbox-switch-1"></label>
+                </div>
+                <span>
+                  <p class="lead">Marketing Messages, such as emails about Events and e-Learning opportunities that may be <br> relevant to you from time to time</p>
+                </span>
+              </li>
+              <li>
+                <div class="input-checkbox input-checkbox--switch">
+                  <input id="checkbox-switch-2" type="checkbox" name="shortlisted">
+                  <label for="checkbox-switch-2"></label>
+                </div>
+                <span>Content, such as Jobbio News and Articles relevant to you, sent occasionally</span>
+              </li>
+              <li>
+                <div class="input-checkbox input-checkbox--switch">
+                  <input id="checkbox-switch-3" type="checkbox" name="shortlisted">
+                  <label for="checkbox-switch-3"></label>
+                </div>
+                <span>Web Push Notifications, in your browser when on the Jobbio website</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

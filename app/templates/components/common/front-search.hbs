@@ -1,0 +1,36 @@
+<section class="imagebg height-50 text-center parallax" data-overlay="7" data-gradient-bg="#fa6160,#5a97ef,#ff8a00,#fa6160">
+  <div class="container pos-vertical-center">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 60px; margin-bottom: 30px">Find The Job That Works For You</h1>
+        <div class="boxed boxed--lg bg--white text-left" style="background: rgba(255,255,255,.3);">
+          <form {{action 'search' on='submit'}}  class="row form--horizontal form-search" style="margin-left: 0;">
+            <div class="col-md-5">
+              {{input id="frontSearchInput" placeholder='Search Job Title or Company' value=keywords}}
+            </div>
+            <div class="col-md-5">
+              {{#power-select
+                      options=predictions
+                      id='frontLocationSearch'
+                      allowClear=true
+                      placeholder="Search Location"
+                      search=(action 'searchLocations')
+                      selected=selected
+                      onchange=(action (mut selected))
+                      as |location|
+              }}
+                {{location.description}}
+              {{/power-select}}
+            </div>
+            <div class="col-md-2">
+              {{#link-to 'search.results' (query-params search=keywords location=location) id="frontSearchResults"}}
+                <button id="frontSearchSubmit" type="submit" class="btn btn--primary type--uppercase">Search</button>
+              {{/link-to}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{yield}}

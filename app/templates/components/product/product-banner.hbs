@@ -1,0 +1,19 @@
+{{yield}}
+<section class="cover height-100 cover-features imagebg parallax product-banner" data-overlay="9">
+  <div class="background-image-holder" style="transform: translate3d(0px, 0px, 0px); background: url('{{banner}}'); opacity: 1; top: -94px; height: 1063px;"> <img alt="background" src="{{banner}}"> </div>
+  <div class="container pos-vertical-center">
+    <div class="row">
+      <div class="col-lg-9 col-xl-7">
+        <div class="live-talent">
+          <span class="application_count" data-start="2000007" data-per-day="86400"></span> <span class="name">LIVE TALENT</span>
+        </div>
+        <h1> Attract Talent <span style="color: #fa6160">+</span> Manage Talent </h1>
+        <p class="lead"> Jobbio provides a suite of talent attraction features to help you <br>
+          Hire the right talent - cost effectively and fast. <br>
+          Join the inbound hiring revolution today. </p>
+        {{#link-to 'company.onboarding' (query-params package='single-job-post-1') id='productBannerPostJob' class='btn type--uppercase'}} <span class="btn__text">Post A Job Now</span>{{/link-to}}
+        {{#link-to 'get-a-demo' (query-params source='product-offering') id='productBannerSpeak' class='btn btn--primary type--uppercase'}} <span class="btn__text">Free Call Back</span>{{/link-to}}
+      </div>
+    </div>
+  </div>
+</section>

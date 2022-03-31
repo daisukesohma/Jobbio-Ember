@@ -1,0 +1,60 @@
+{{yield}}
+{{#each panels as |panel|}}
+  {{#if panel.layoutType}}
+    <section class="switchable feature-large switchable--switch" id="section-{{object.id}}" style="{{style}}">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-6 col-12">
+            <div class="video-cover border--round box-shadow-wide">
+              {{#if panel.image}}
+                <div class="background-image-holder" style="background: url('{{imageLink}}{{panel.image}}'); opacity: 1;">
+                  <img alt="image" src="{{imageLink}}{{panel.image}}">
+                </div>
+              {{/if}}
+              {{#if panel.video}}
+                <div class="video-play-icon"></div>
+                <iframe data-src="{{{panel.video}}}" allowfullscreen="allowfullscreen"></iframe>
+              {{else}}
+                <iframe allowfullscreen="allowfullscreen"></iframe>
+              {{/if}}
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-5">
+            <div class="switchable__text">
+              <h2 style="color: {{object.text_color}}">{{panel.title}}</h2>
+              <p class="lead" style="color: {{object.tertiary_color}}">{{panel.text}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{else}}
+    <section class="feature-large switchable--switch" id="section-{{object.id}}" style="{{style}}">
+      <div class="container">
+        <div class="row justify-content-between align-items-center flex-row-reverse">
+          <div class="col-md-6 col-12">
+            <div class="video-cover border--round box-shadow-wide">
+              {{#if panel.image}}
+                <div class="background-image-holder" style="background: url('{{imageLink}}{{panel.image}}'); opacity: 1;">
+                  <img alt="image" src="{{imageLink}}{{panel.image}}">
+                </div>
+              {{/if}}
+              {{#if panel.video}}
+                <div class="video-play-icon"></div>
+                <iframe data-src="{{{panel.video}}}" allowfullscreen="allowfullscreen"></iframe>
+              {{else}}
+                <iframe allowfullscreen="allowfullscreen"></iframe>
+              {{/if}}
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-5">
+            <div class="switchable__text">
+              <h2 style="color: {{object.text_color}}">{{panel.title}}</h2>
+              <p class="lead" style="color: {{object.tertiary_color}}">{{panel.text}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/if}}
+{{/each}}

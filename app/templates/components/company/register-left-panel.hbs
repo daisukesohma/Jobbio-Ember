@@ -1,0 +1,54 @@
+{{yield}}
+<div class="col-lg-5 col-md-6 switchable__text text-center">
+  {{#if model.package.image}}
+    <img src="{{model.package.image}}" class="logo">
+  {{else}}
+    {{#if model.package.hero_title}}
+      <h1>{{model.package.hero_title}}</h1>
+    {{else}}
+      <h2>Get Free Unlimited Job Posts</h2>
+    {{/if}}
+  {{/if}}
+  {{#if model.package.subtitle}}
+    <p>{{model.package.subtitle}}<br></p>
+  {{/if}}
+  {{#if model.package.package_details}}
+    {{#each model.package.package_details as |box|}}
+      <div class="feature feature-2 text-left">
+        <i class="icon {{box.icon}} color--primary"></i>
+        <div class="feature__body ">
+          <h5 style="line-height: 1;">{{box.title}}</h5>
+          <p style="line-height: 1.3;">{{box.text}}</p>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <p>Jobbio helps you hire the best talent quickly and cost effectively.<br></p>
+    <div class="feature feature-2 text-left">
+      <i class="icon icon-Megaphone color--primary"></i>
+      <div class="feature__body ">
+        <h5 style="line-height: 1;">Jobbio supercharges job advertising</h5>
+        <p style="line-height: 1.3;">Our technology instantly publishes your job on 50+ job sites including Indeed and LinkedIn.</p>
+      </div>
+    </div>
+    <div class="feature feature-2 text-left">
+      <i class="icon icon-MaleFemale color--primary"></i>
+      <div class="feature__body">
+        <h5 style="line-height: 1;">Jobbio targets your job to the right people</h5>
+        <p style="line-height: 1.3;">Our talent matching algorithm promotes your jobs to the thousands of engaged, qualified job seekers searching for jobs on our site every day.</p>
+      </div>
+    </div>
+    <div class="feature feature-2 text-left">
+      <i class="icon icon-Paper-Plane color--primary"></i>
+      <div class="feature__body">
+        <h5 style="line-height: 1;">Jobbio helps you manage applications with ease</h5>
+        <p style="line-height: 1.3;">Search, track, filter, message and review talent in one easy-to-use platform.</p>
+      </div>
+    </div>
+  {{/if}}
+  {{#if (eq model.package.title 'TechWorld')}}
+  {{else if (eq model.package.title 'ComputerWorld')}}
+  {{else if (eq model.package.title 'DigitalArts')}}
+  {{else}}
+  {{/if}}
+</div>

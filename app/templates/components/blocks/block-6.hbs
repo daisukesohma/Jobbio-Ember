@@ -1,0 +1,26 @@
+{{yield}}
+<style>
+  #section-{{object.id}} a.modal-trigger:hover {
+    border-color: {{object.primary_color}} !important;
+  }
+</style>
+<section class="space--xxs text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="modal-instance">
+          <a class="btn type--uppercase modal-trigger" style="background-color: {{object.primary_color}}">
+            <span class="btn__text" style="color: {{object.text_color}}">
+							▶ {{object.primary_cta_text}}
+						</span>
+          </a>
+          <div class="modal-container" id="smallVideo{{object.id}}">
+            <div class="modal-content bg-dark" data-width="60%" data-height="60%">
+              <iframe data-src="{{object.video}}" src="{{object.video}}" allowfullscreen="allowfullscreen"></iframe>
+            </div>
+          </div>
+        </div>
+        <span class="block--xs" style="color: {{object.text_color}}">{{object.title}} </span> </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+{{yield}}
+{{#unless visited}}
+  <div class="cookie-policy-popup">
+    <div class="cookie-policy-body">
+      <p class="cookie-policy-text">
+        By browsing Jobbio you agree to our Cookie Policy. We only use Cookies to enhance your Jobbio experience. Click {{#link-to 'cookie-policy' target='_blank' id="frontHeadTalentCookiePolicy"}}here{{/link-to}} to view details.
+      </p>
+      <button id="frontHeadTalentCloseButton" type="button" style="padding-left: 3.48214286em; padding-right: 3.48214286em; margin-top: 15px" class="btn btn--lg btn--primary type--uppercase" {{action "hideCookiePolicyPopup"}}>CLOSE</button>
+    </div>
+  </div>
+{{/unless}}
+<div class="nav-container front-head-talent" style="min-height: 0px;">
+  <div class="via-1517474857094" via="via-1517474857094" vio="navigation (main)">
+    <div class="bar bar--sm mobile-bar visible-xs">
+      <div class="container">
+        <div class="row">
+          <div class="col-3 col-sm-2">
+            <a id="frontHeadTalentLogo" href="/">
+              <img class="logo logo-dark" alt="logo" src="{{{logoDark}}}">
+              <img class="logo logo-light" alt="logo" src="{{{logoLight}}}">
+            </a>
+          </div>
+          <div class="col-9 col-sm-10 text-right">
+            <button id="frontHeadTalentLogoMobile" {{action toggleProperty 'active'}} class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs hidden-sm">
+              <i class="icon icon--sm stack-interface stack-menu"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav id="menu1" class="bar bar-1 {{visible}} {{if active 'hidden-sm'}} {{unless active 'hidden-xs'}}" data-scroll-class="366px:pos-fixed">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-1 hidden-xs">
+            <div class="bar__module">
+              <a id="frontHeadTalentLogoCTA" href="/">
+                <img class="logo logo-dark" alt="logo" src="{{{logoDark}}}">
+                <img class="logo logo-light" alt="logo" src="{{{logoLight}}}">
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-11 text-right text-left-xs">
+            <div class="bar__module">
+              <ul class="menu-horizontal text-left">
+                <li><span class="icon-Profile" style="margin-right: 5px;"></span><a id="frontHeadTalentDashboard" href="{{talentDashboardBio}}">BIO</a></li>
+                <li><span class="icon-Magnifi-Glass2" style="margin-right: 5px;"></span><a id="frontHeadTalentSearch" href="{{homepage}}/search">JOB SEARCH</a></li>
+                <li><span class="icon-Align-JustifyRight" style="margin-right: 5px;"></span><a id="frontHeadTalentDashboardApplications" href="{{talentDashboard}}">APPLICATIONS</a></li>
+                <li><span class="icon-Unlock-2" style="margin-right: 5px;"></span><a id="frontHeadTalentLogOut" onclick={{action 'invalidateSession'}} style="cursor: pointer">LOG OUT</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

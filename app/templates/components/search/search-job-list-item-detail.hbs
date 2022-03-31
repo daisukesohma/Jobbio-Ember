@@ -1,0 +1,44 @@
+{{yield}}
+{{common/company-logo company=job.company}}
+<div class="{{cssPrefix}}col-sm-9" style="padding-left:5px">
+  {{#if isMobile}}
+    {{#link-to "job" job.company.slug job.slug (query-params source=(concat job.company.slug '_job')) id=(concat 'jobSearchListItemSlug_' job.id)}}
+      <div class="job-name">
+        <h4 style="font-size:1em">{{job.title}}</h4>
+      </div>
+    {{/link-to}}
+  {{else}}
+    <div class="job-name">
+      <h4 style="font-size:1em">{{job.title}}</h4>
+    </div>
+  {{/if}}
+  <div class="mobile-view">
+    <span style="color: blue; overflow-wrap: break-word; font-weight:400;">{{if job.is_recruiter 'Recruiter' job.company.name}}</span><br>
+    {{#if job.location}}
+      <span style="color: grey; overflow-wrap: break-word; font-weight:400;">{{if job.location.city job.location.city job.location.address}}</span>
+    {{/if}}
+  </div>
+  <div class="desktop-view">
+    <span style="color: blue; overflow-wrap: break-word;">{{if job.is_recruiter 'Recruiter' job.company.name}}</span><br>
+    {{#if job.location}}
+      <span style="color: grey; overflow-wrap: break-word;">{{if job.location.city job.location.city job.location.address}}</span>
+    {{/if}}
+  </div>
+</div>
+<div class="{{cssPrefix}}col-sm-3 text-center" style="padding-top: 10px;">
+  {{#each buttons as |button|}}
+    {{#if (eq button.type 'default')}}
+      <a id="{{button.id}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+        <span class="btn__text">{{button.text}}</span>
+      </a>
+    {{else if (eq button.type 'linkTo')}}
+      {{#link-to button.route (query-params job=job.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+        <span class="btn__text">{{button.text}}</span>
+      {{/link-to}}
+    {{else if (eq button.type 'onClickAction')}}
+      <a id="{{button.id}}" class="{{button.class}}" onclick={{action button.action button.actionParam bubbles=false}}>
+        <span class="btn__text">{{button.text}}</span>
+      </a>
+    {{/if}}
+  {{/each}}
+</div>

@@ -1,0 +1,60 @@
+{{yield}}
+{{#each panels as |panel|}}
+  {{#if panel.layoutType}}
+    <section class="imageblock switchable feature-large switchable--switch bg--secondary" id="section-{{object.id}}" style="{{style}}">
+      <div class="imageblock__content col-lg-6 col-md-4 pos-right">
+        {{#if panel.image}}
+          <div class="background-image-holder">
+            <img alt="image" src="{{imageLink}}{{panel.image}}">
+          </div>
+        {{/if}}
+        {{#if panel.video}}
+          <div class="modal-instance">
+            <div class="video-play-icon modal-trigger"></div>
+            <div class="modal-container">
+              <div class="modal-content bg-dark" data-width="60%" data-height="60%">
+                <iframe data-src="{{{panel.video}}}" allowfullscreen="allowfullscreen"></iframe>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-7">
+            <h2 style="color: {{object.text_color}}">{{panel.title}}</h2>
+            <p class="lead" style="color: {{object.tertiary_color}}">{{{panel.text}}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{else}}
+    <section class="imageblock feature-large switchable--switch bg--secondary" id="section-{{object.id}}" style="{{style}}">
+      <div class="imageblock__content col-lg-6 col-md-4 pos-left">
+        {{#if panel.image}}
+          <div class="background-image-holder">
+            <img alt="image" src="{{imageLink}}{{panel.image}}">
+          </div>
+        {{/if}}
+        {{#if panel.video}}
+          <div class="modal-instance">
+            <div class="video-play-icon modal-trigger"></div>
+            <div class="modal-container">
+              <div class="modal-content bg-dark" data-width="60%" data-height="60%">
+                <iframe data-src="{{{panel.video}}}" allowfullscreen="allowfullscreen"></iframe>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="offset-md-7 col-md-5 offset-sm-5 col-sm-7">
+            <h2 style="color: {{object.text_color}}">{{panel.title}}</h2>
+            <p class="lead" style="color: {{object.tertiary_color}}">{{{panel.text}}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/if}}
+{{/each}}

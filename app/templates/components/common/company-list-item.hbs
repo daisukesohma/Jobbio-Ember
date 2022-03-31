@@ -1,0 +1,10 @@
+{{#link-to "channel" company.slug id=(concat 'company_item_' company.id '_' id) class="row"}}
+  {{common/company-logo company=company}}
+  <span class="col-12">
+    <span style={{noJobsStyle}}>{{company.name}}</span>
+    {{#unless (eq company.live_jobs 0)}}
+      <small>{{company.live_jobs}} Jobs</small>
+    {{/unless}}
+  </span>
+{{/link-to}}
+{{yield}}

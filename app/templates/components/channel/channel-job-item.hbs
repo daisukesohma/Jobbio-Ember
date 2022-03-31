@@ -1,0 +1,40 @@
+<div class="job-list-item">
+  {{#if embed}}
+    <a id="jobListItemSlug_{{job.id}}" href="{{link}}/companies/{{job.company.slug}}/jobs/{{job.slug}}?source={{job.company.slug}}_job" target="_blank" class="row boxed boxed--border">
+      {{common/company-logo company=job.company}}
+      <span class="{{cssPrefix}}col-12">
+        <div class="job-name">
+          <h4>{{job.title}}</h4>
+        </div>
+        <ul class="list-inline">
+          <li><i class="icon icon--sm icon-Suitcase"></i>{{job.company.name}}</li>
+          {{#if job.salary_disclosed}}
+            <li><i class="icon icon--sm icon-Coins"></i>{{salary}} {{salaryType}}</li>
+          {{/if}}
+          {{#if job.location}}
+            <li><i class="icon icon--sm icon-Map-Marker"></i>{{job.location.address}}</li>
+          {{/if}}
+        </ul>
+      </span>
+    </a>
+  {{else}}
+    {{#link-to "job" job.company.slug job.slug (query-params source=(concat job.company.slug '_job')) id=(concat 'jobListItemSlug_' job.id) class="row boxed boxed--border"}}
+      {{common/company-logo company=job.company}}
+      <span class="{{cssPrefix}}col-12">
+        <div class="job-name">
+          <h4>{{job.title}}</h4>
+        </div>
+        <ul class="list-inline">
+          <li><i class="icon icon--sm icon-Suitcase"></i>{{if job.is_recruiter 'Recruiter' job.company.name}}</li>
+          {{#if job.salary_disclosed}}
+            <li><i class="icon icon--sm icon-Coins"></i>{{salary}} {{salaryType}}</li>
+          {{/if}}
+          {{#if job.location}}
+            <li><i class="icon icon--sm icon-Map-Marker"></i>{{if job.location.city job.location.city job.location.address}}</li>
+          {{/if}}
+        </ul>
+      </span>
+    {{/link-to}}
+  {{/if}}
+</div>
+{{yield}}

@@ -1,0 +1,15 @@
+{{#if isText}}
+  {{job/job-question-text question=question question_answers=application_answers}}
+{{/if}}
+{{#if isSlider}}
+  {{job/job-question-slider question=question question_answers=application_answers}}
+{{/if}}
+{{#if isRange}}
+  {{job/job-question-range question=question question_answers=application_answers}}
+{{/if}}
+{{#if isBool}}
+  {{job/job-question-bool question=question question_answers=application_answers}}
+{{/if}}
+{{#if isSelect}}
+  {{job/job-question-select question=question question_answers=application_answers}}
+{{/if}}

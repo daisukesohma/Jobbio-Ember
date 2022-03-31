@@ -1,0 +1,249 @@
+<div class="main-container">
+  <section class="switchable switchable--switch imagebg" data-overlay="9">
+    <div class="background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1;">
+      <img alt="background" src="{{{backgroundImage}}}">
+    </div>
+    <div class="container company-registration">
+      <div class="row justify-content-between">
+        {{company/register-left-panel model=model}}
+        <div class="col-md-6">
+          <div class="boxed boxed--lg bg--white boxed--border boxed-form">
+            {{!-- This is a temporary patch for TW, CW and DA --}}
+            {{#if (eq model.package.title 'TechWorld')}}
+            {{else if (eq model.package.title 'ComputerWorld')}}
+            {{else if (eq model.package.title 'DigitalArts')}}
+            {{else if (eq model.package.title 'Independent')}}
+            {{else}}
+              {{#if model.package.form_title}}
+                <h4>{{model.package.form_title}}</h4>
+              {{else}}
+                <h4>Get Started Now</h4>
+              {{/if}}
+            {{/if}}
+            {{!-- End of patch --}}
+            <form {{action "register" post on="submit"}} class="registrationForm">
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">star</i>
+                    {{input id="registerCompanyName" type="text" name="name" value=name placeholder="Company Name"}}
+                    {{#if errors.company_name}}
+                      <label class="registration-validation-error">
+                        {{errors.company_name}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div style="clear: both"></div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">person</i>
+                    {{input id="registerCompanyFirstName" type="text" name="first_name" value=first_name placeholder="First Name"}}
+                    {{#if errors.first_name}}
+                      <label class="registration-validation-error">
+                        {{errors.first_name}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">person_outline</i>
+                    {{input id="registerCompanyLastName" type="text" name="last_name" value=last_name placeholder="Last Name"}}
+                    {{#if errors.last_name}}
+                      <label class="registration-validation-error">
+                        {{errors.last_name}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">email</i>
+                    {{input id="registerCompanyEmail" type="email" name="email" value=email placeholder="Email Address"}}
+                    {{#if errors.email}}
+                      <label class="registration-validation-error">
+                        {{errors.email}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">phone</i>
+                    {{input id="registerCompanyPhone" type="text" name="phone" value=phone placeholder="Contact Number"}}
+                    {{#if errors.phone}}
+                      <label class="registration-validation-error">
+                        {{errors.phone}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon {{if focused 'password-icon-active'}}">
+                    <a tabindex="-1" href="javascript:void(0)" {{action 'passwordVisibility' visible}}>
+                      <i class="cursor-hand material-icons">visibility</i>
+                    </a>
+                    {{input id="registerCompanyPassword" focus-in=(action "focus" true) focus-out=(action "focus" false) type=visible name="password" value=password placeholder="Password"}}
+                    {{#unless errors.password}}
+                      <small class="text-muted password-subtitle">
+                        Password must contain a minimum of 6 characters with at least 1 letter and 1 number
+                      </small>
+                    {{/unless}}
+                    {{#if errors.password}}
+                      <label class="registration-validation-error">
+                        {{errors.password}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">add_location</i>
+                    {{g-autocomplete name="add_ress" value=address on-select=(action "didUpdatePlace") id='add_ress' class='form-control' on-select-error=(action "invalidUserSelection")}}
+                    {{#if errors.address}}
+                      <label class="registration-validation-error">
+                        {{errors.address}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-checkbox-wrapper">
+                    <div class="input-checkbox">
+                      <input id="input-assigned-0" type="checkbox" required name="terms" {{action 'agree' on="change"}}> <label for="input-assigned-0"></label>
+                    </div>
+                    {{#if (eq model.package.title 'TechWorld')}}
+                      <span>I accept Jobbio's {{#link-to 'terms'}}Terms &amp; Conditions{{/link-to}} and {{#link-to 'privacy-policy'}}Privacy Policy{{/link-to}}</span>
+                      {{#if errors.terms}}<label class="registration-validation-error">{{errors.terms}}</label>{{/if}}
+                    {{else if (eq model.package.title 'ComputerWorld')}}
+                      <span>I accept Jobbio's {{#link-to 'terms'}}Terms &amp; Conditions{{/link-to}} and {{#link-to 'privacy-policy'}}Privacy Policy{{/link-to}}</span>
+                      {{#if errors.terms}}<label class="registration-validation-error">{{errors.terms}}</label>{{/if}}
+                    {{else if (eq model.package.title 'DigitalArts')}}
+                      <span>I accept Jobbio's {{#link-to 'terms'}}Terms &amp; Conditions{{/link-to}} and {{#link-to 'privacy-policy'}}Privacy Policy{{/link-to}}</span>
+                      {{#if errors.terms}}<label class="registration-validation-error">{{errors.terms}}</label>{{/if}}
+                    {{else}}
+                      <span>I accept the {{#link-to 'terms'}}Terms &amp; Conditions{{/link-to}} and {{#link-to 'privacy-policy'}}Privacy Policy{{/link-to}}</span>
+                      {{#if errors.terms}}<label class="registration-validation-error">{{errors.terms}}</label>{{/if}}
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  {{#if registering}}
+                    <span class="btn__text">{{paper-progress-linear}}</span>
+                  {{else}}
+                    <button id="registerCompanySubmit" type="submit" class="btn btn--primary">
+                      {{!-- This is a temporary patch for TW, CW and DA --}}
+                      {{#if (eq model.package.title 'TechWorld')}}
+                        Get Started with Jobbio
+                      {{else if (eq model.package.title 'ComputerWorld')}}
+                        Get Started with Jobbio
+                      {{else if (eq model.package.title 'DigitalArts')}}
+                        Get Started with Jobbio
+                      {{else}}
+                        {{#if model.package.customizable}}
+                          {{model.package.cta}}
+                        {{else}}
+                          Get Started
+                        {{/if}}
+                      {{/if}}
+                      {{!-- End of patch --}}
+                    </button>
+                  {{/if}}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{#unless model.package}}
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2>How It Works</h2>
+          </div>
+          <div class="col-md-4 col-lg-3" style="padding-top:50px;">
+            <div class="text-block text-center">
+              <img alt="Icon" style="width:80px;height:80px;text-align: center;" src="/assets/Jobbio-Icon-Application-Settings-Support.svg">
+              <h4 style="font-size: 18px;">Post Unlimited Jobs</h4>
+              <p>Don't limit your hiring. Post an unlimited number of jobs prior, during and post awards.</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-3" style="padding-top:50px;">
+            <div class="text-block text-center">
+              <img alt="Icon" style="width:80px;height:80px;" src="/assets/Jobbio-Icon-PaperPlane-Message.svg">
+              <h4 style="font-size: 18px;">Supercharged Jobs Marketing</h4>
+              <p>Your job will feature across our exclusive partnership network and on 50+ sites including LinkedIn, Glassdoor and Indeed.</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-3" style="padding-top:50px;">
+            <div class="text-block text-center ">
+              <img alt="Icon" style="width:80px;height:80px;" src="/assets/Jobbio-Icon-Content-CV.svg">
+              <h4 style="font-size: 18px;">Manage Applications with Ease</h4>
+              <p>Review, shortlist amd sort talent all in one easy to use platform. Collaborate with hiring managers and team members to hire better together.</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-3" style="padding-top:50px;">
+            <div class="text-block text-center">
+              <img alt="Icon" style="width:80px;height:80px;" src="/assets/Jobbio-Icon-Happy-Easy.svg">
+              <h4 style="font-size: 18px;">Continue the Hiring Party</h4>
+              <p>If you've got further hiring needs after 30 days you can easily upgrade to a full Jobbio subscription.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="companies-logo">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h2>Trusted By 6000 Teams Globally</h2>
+          </div>
+          <div class="logos" style="margin-top:50px;">
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/airbnb-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/slack-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/revolut-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/hellofresh-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/docusign-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/hootsuite-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/shazam-slide.png">
+            </div>
+            <div class="col-sm-3 col-6 logo">
+              <img alt="Image" class="image--xs" src="{{model.image}}/secretescapes-slide.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-lg-6">
+            <div class="cta">
+              <a id="ctaRegisterCompanyTryItFree" class="btn btn--md type--uppercase" href="/company/register">
+                <span class="btn__text">Try It Free</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/unless}}
+</div>
+{{outlet}}

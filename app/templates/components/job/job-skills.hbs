@@ -1,0 +1,13 @@
+{{yield}}
+{{#if job.skills}}
+  <div class="row boxed boxed--border post skills">
+    <div class="col-12">
+      <h4>Skills</h4>
+      <div>
+        {{#each job.skills as |skill|}}
+          <span>{{skill.name}}</span>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+{{/if}}

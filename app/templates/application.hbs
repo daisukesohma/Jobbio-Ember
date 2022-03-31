@@ -1,0 +1,24 @@
+{{#if isTalent}}
+  {{#if (or apply embeded redirect demo channel isSearch)}}
+  {{else}}
+    {{common/front-head-talent opacity=opacity}}
+  {{/if}}
+{{else if isCompany}}
+  {{#if (or redirect embeded demo channel isSearch)}}
+  {{else}}
+    {{common/front-head-company opacity=opacity}}
+  {{/if}}
+{{else if isAdmin}}
+  {{#if (or redirect embeded demo channel isSearch)}}
+  {{else}}
+    {{common/front-head-admin opacity=opacity}}
+  {{/if}}
+{{else if (or embeded isTalentRegister redirect demo channel isSearch)}}
+{{else if isProductOffering}}
+   {{common/front-head-product opacity=opacity}}
+{{else if isPricing}}
+  {{common/front-head-pricing}}
+{{else}}
+  {{common/front-head opacity=opacity customCss=customCss}}
+{{/if}}
+{{outlet}}

@@ -1,0 +1,31 @@
+{{yield}}
+<section class="text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-lg-8">
+        <form class="form--inline form-email" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly." novalidate="true">
+          <span class="h4 inline-block">Hi, I'm</span>
+          <input type="text" name="name" placeholder="Full Name" class="validate-required">
+          <span class="h4 inline-block">and I currently work as a</span>
+          <input type="text" name="Job" placeholder="Job Title" class="validate-required">
+          <span class="h4 inline-block"> for </span>
+          <input type="text" name="Company" placeholder="Company Name" class="validate-required">
+          <span class="h4 inline-block">I'm interested in a</span>
+          <div class="input-select">
+            <select class="validate-required">
+              <option selected="selected" value="">Marketing</option>
+              <option value="Design">Sales</option>
+              <option value="Development">Technology</option>
+            </select>
+          </div>
+          <span class="h4 inline-block">job, and I can start on</span>
+          <input type="text" name="Date" placeholder="Date / Timeframe" class="validate-required">
+          <span class="h4 inline-block">You can contact me via</span> <input type="email" name="email" placeholder="Email Address" class="validate-required validate-email">
+          <span class="h4 inline-block">or</span>
+          <input type="tel" name="Phone" placeholder="Phone Number" class="validate-required">
+          <div class="mt--1"> <button type="submit" class="btn btn--primary type--uppercase">Submit My Details</button> </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

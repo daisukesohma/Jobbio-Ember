@@ -1,0 +1,20 @@
+{{yield}}
+<section class="text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-10">
+        {{#swiper-container options=myOptions}}
+          {{#each object.block_content_entry as |entry|}}
+            {{#swiper-slide}}
+              <div class="testimonial">
+                <blockquote>{{{entry.text}}}</blockquote>
+                <h5>{{entry.title}}</h5>
+                <span>{{entry.subtitle}}</span>
+              </div>
+            {{/swiper-slide}}
+          {{/each}}
+        {{/swiper-container}}
+      </div>
+    </div>
+  </div>
+</section>

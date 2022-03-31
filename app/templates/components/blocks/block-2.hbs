@@ -1,0 +1,57 @@
+{{yield}}
+<style>
+  #section-{{object.id}} .customSecondaryButtonBanner {
+    width: 210px;
+    background-color: {{object.secondary_color}} !important;
+    border-color: {{object.secondary_color}} !important;
+  }
+  #section-{{object.id}} .customPrimaryButtonBanner {
+    width: 210px;
+    background-color: {{object.primary_color}} !important;
+    border-color: {{object.primary_color}} !important;
+  }
+</style>
+<section class="block-2 imagebg {{if object.video 'videobg video-active'}} height-{{object.height}} text-center" data-overlay="{{object.overlay}}" id="section-{{object.id}}" style="{{style}}">
+  {{#if object.video}}
+    <div class="yt-container">
+      <div class="yt-wrapper">
+        <iframe
+          key={{videoID}}
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/{{videoID}}?controls=0&autoplay=1&showinfo=0&mute=1&loop=1&playlist={{videoID}}"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        />
+        <div class="yt-mask"/>
+      </div>
+    </div>
+  {{/if}}
+  {{#if object.background_image}}
+    <div class="background-image-holder" style="background: url({{imageLink}}{{object.background_image}}); opacity: 1;">
+      <img alt="image" src="{{imageLink}}{{object.background_image}}">
+    </div>
+  {{/if}}
+  <div class="container pos-vertical-center v-content">
+    <div class="row">
+      <div class="col-md-8 col-lg-7">
+        <h1 style="color: {{object.text_color}}">{{object.title}}</h1>
+        <p class="lead" style="color: {{object.text_color}}">{{object.text}}</p>
+        {{#if (contains object.secondary_cta_link 'section-')}}
+          {{scroll-to href=(concat '#' object.secondary_cta_link) label=object.secondary_cta_text class="btn btn--primary mb-md-0 mb-3 type--uppercase customSecondaryButtonBanner"}}
+        {{else}}
+          <a class="btn btn--primary mb-md-0 mb-3 type--uppercase customSecondaryButtonBanner" href="{{object.secondary_cta_link}}" target="_blank">
+            <span class="btn__text">{{object.secondary_cta_text}}</span>
+          </a>
+        {{/if}}
+        {{#if (contains object.primary_cta_link 'section-')}}
+          {{scroll-to href=(concat '#' object.primary_cta_link) label=object.primary_cta_text class="btn btn--primary mb-md-0 mb-3 type--uppercase customPrimaryButtonBanner"}}
+        {{else}}
+          <a class="btn btn--primary mb-md-0 mb-3 type--uppercase customPrimaryButtonBanner" href="{{object.primary_cta_link}}" target="_blank">
+            <span class="btn__text">{{object.primary_cta_text}}</span>
+          </a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>

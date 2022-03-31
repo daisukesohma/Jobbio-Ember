@@ -1,0 +1,34 @@
+{{yield}}
+{{#if (eq object.social_type 'instagram')}}
+  <section class="text-center" id="section-{{object.id}}" style="{{style}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="instafeed" data-user-name="{{object.social_link}}" data-amount="12" data-grid="6"></div>
+          <a class="btn btn--icon bg--instagram type--uppercase" href="#">
+            <span class="btn__text">
+              <i class="socicon socicon-instagram"></i>
+              Follow @{{channel.name}}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{{else if (eq object.social_type 'twitter')}}
+  <section class="text-center imagebg" id="section-{{object.id}}" style="{{style}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-lg-6">
+          <div class="text-left tweets-feed tweets-feed-1 bg--secondary" data-feed-name="{{object.social_link}}" data-amount="3"></div>
+          <a class="btn btn--icon bg--twitter" href="https://twitter.com/{{object.social_link}}" target="_blank">
+            <span class="btn__text">
+              <i class="socicon socicon-twitter"></i>
+              Visit @{{channel.name}} On Twitter
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{{/if}}

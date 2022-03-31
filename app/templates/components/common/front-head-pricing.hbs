@@ -1,0 +1,59 @@
+{{yield}}
+{{#unless visited}}
+  <div class="cookie-policy-popup">
+    <div class="cookie-policy-body">
+      <p class="cookie-policy-text">
+        By browsing Jobbio you agree to our Cookie Policy. We only use Cookies to enhance your Jobbio experience. Click {{#link-to 'cookie-policy' target='_blank' id="frontHeadCookiePolicy"}}here{{/link-to}} to view details.
+      </p>
+      <button id="frontHeadCloseButton" type="button" style="padding-left: 3.48214286em; padding-right: 3.48214286em; margin-top: 15px" class="btn btn--lg btn--primary type--uppercase" {{action "hideCookiePolicyPopup"}}>CLOSE</button>
+    </div>
+  </div>
+{{/unless}}
+<div class="nav-container front-head front-head-product">
+  <div>
+    <div class="bar bar--sm visible-xs">
+      <div class="container">
+        <div class="row">
+          <div class="col-3 col-md-2">
+            <a href="/"> <img class="logo logo-dark" alt="logo" src="{{{logoDark}}}"> <img class="logo logo-light" alt="logo" src="{{{logoLight}}}"> </a>
+          </div>
+          <div class="col-9 col-md-10 text-right">
+            <a href="#" class="hamburger-toggle" {{action toggleProperty 'active'}} data-toggle-class="#menu1;hidden-xs hidden-sm"> <i class="icon icon--sm stack-interface stack-menu"></i> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav id="menu1" class="bar bar-1 hidden-xs bar--absolute" data-scroll-class="366px:pos-fixed">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-2 hidden-xs">
+            <div class="bar__module">
+              <a href="/"> <img class="logo logo-dark" alt="logo" src="{{{logoDark}}}"> <img class="logo logo-light" alt="logo" src="{{{logoLight}}}"> </a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="bar__module">
+              <ul class="menu-horizontal text-left">
+                <li><span class="icon-Magnifi-Glass2"></span> <a href="/search">Job Search</a></li>
+                <li class="dropdown">
+                  <span class="dropdown__trigger">HIRING</span>
+                  {{common/company-head-popup}}
+                </li>
+                <li class="dropdown">
+                  <span class="dropdown__trigger">PARTNERS</span>
+                  {{common/partners-head-popup}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 text-right text-left-xs text-left-sm">
+            <div class="row no-gutters">
+              <div class="col">{{input class="c-textbox bg--secondary" type="tel" placeholder="Enter phone number" value=phone}}</div>
+              <div class="col"><a class="btn type--uppercase btn--primary" {{action 'callBack'}} style="background-color: #fa6160; border-color: #fa6160"> <span class="btn__text">Request Free Call Back</span></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

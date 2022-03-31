@@ -1,0 +1,16 @@
+<section class="maincolumns front-main" style="{{if padding 'padding-top:10px'}}">
+  <div class="container md-max-width-none">
+    <div class="row">
+      <div class="col-12">
+        {{#if error}}
+        <div class="alert bg--error">
+          <div class="alert__body">
+            <span>This channel is no longer available.</span>
+          </div>
+        </div>
+        {{/if}}
+        {{yield}}
+      </div>
+    </div>
+  </div>
+</section>

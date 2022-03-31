@@ -1,0 +1,11 @@
+{{yield}}
+<a id="popularJobType{{name}}CTA" onclick={{action 'searchJobType' link}} style="cursor: pointer;" class="block">
+  <div class="feature feature-7 boxed text-center imagebg" data-overlay="6" style="margin-bottom: 30px;">
+    <div class="background-image-holder" style="{{{imageBackground}}}">
+      <img alt="background" src="{{lazyImage}}">
+    </div>
+    <h4 class="pos-vertical-center">
+      <span style="margin-right: 5px;" class="icon-{{icon}}"></span>{{name}}
+    </h4>
+  </div>
+</a>

@@ -1,0 +1,32 @@
+<section class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-md-6">
+        <div class="cta">
+          <h2>Don't Miss Out!</h2>
+          {{#each buttons as |button|}}
+            {{#if (eq button.type 'default')}}
+              <a id="{{button.id}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                <span class="btn__text">{{button.text}}</span>
+              </a>
+            {{else if (eq button.type 'linkToApply')}}
+              {{#link-to button.route button.param1 button.param2 (query-params channel=null job=model.id company=model.company.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                <span class="btn__text">{{button.text}}</span>
+              {{/link-to}}
+            {{else if (eq button.type 'linkToRegister')}}
+              {{#link-to button.route (query-params channel=null job=model.id company=null ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                <span class="btn__text">{{button.text}}</span>
+              {{/link-to}}
+            {{else if (eq button.type 'onClickAction')}}
+              <a id="{{button.id}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                <span class="btn__text">{{button.text}}</span>
+              </a>
+            {{/if}}
+          {{/each}}
+          <p class="type--fine-print">view other&nbsp;{{#link-to jobFooterLink company.slug id='jobFootChannel{{if embed "Embed"}}CTA'}}{{company.name}}{{/link-to}}&nbsp;roles</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{yield}}

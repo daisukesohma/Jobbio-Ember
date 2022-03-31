@@ -1,0 +1,84 @@
+{{yield}}
+<section style="height: 100vh" class="imageblock switchable switchable--switch feature-large">
+  <div class="background-image-holder position-fixed" style="background-image:url('{{backgroundImageUrl}}');" data-overlay="{{backgroundOverlay}}">
+    <img alt="image" src="{{backgroundImageUrl}}">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="boxed boxed--lg boxed--border">
+          <div class="col-12 mt-3">
+            <div class="progress-horizontal progress-horizontal--lg">
+              <div class="progress-horizontal__bar" data-value="70"></div>
+            </div>
+          </div>
+          <br>
+          {{#if package}}
+            <h1 style="margin-top:1.3em">{{package.package_page_details.1.title}}</h1>
+            <p class="lead">{{package.package_page_details.1.subtitle}}</p>
+          {{else}}
+            <h1 style="margin-top:1.3em">What Type Of Role?</h1>
+            <p class="lead">What type of hire are you looking to make? You can change these details later.</p>
+          {{/if}}
+          <hr class="short">
+          <form class="form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly."
+                data-error="Please fill in all fields correctly.">
+            <div class="col-sm-12">
+              <div class="input-select">
+                <select id="onboardingJobType" style="height:40px" name="level" onchange={{action 'selectType' value="target.value"}}>
+                  <option selected="" value="">Select Job Type</option>
+                  {{#each form.job_types as |job_type|}}
+                    <option value="{{job_type.id}}">{{job_type.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon"> <i class="material-icons">person</i>
+                {{input id="onboardingJobTitle" type="text" value=model.title placeholder="Job Title"}}
+              </div>
+            </div>
+            <div class="col-sm-12 col-12 mt--1">
+              <button id="onboardingJobNext" {{action 'continueOnboarding'}} disabled={{linkDisabled}} class="btn btn--primary type--uppercase onboarding-get-started">Next</button>
+            </div>
+            <div class="col-12 text-center mt--1">
+            <span class="type--fine-print">
+              {{#link-to 'company.onboarding.payment' (query-params oid=oid) id='onboardingJobSkip'}}
+                SKIP THIS STEP
+              {{/link-to}}
+            </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="row justify-content-md-center">
+          <div class="col-lg-11">
+            <div class="testimonial testimonial-2">
+              <div class="testimonial__body boxed">
+                {{#if package}}
+                  <p class="mt-4"> {{package.package_page_details.1.secondary_text}} </p>
+                {{else}}
+                  <p class="mt-4"> We use Jobbio because it makes my life easier. It’s great that it’s an additional marketing and talent attraction channel for us. They have access to an audience that we don’t have directly. </p>
+                {{/if}}
+                <div class="testimonial__image">
+                  {{#if package}}
+                    {{#if package.package_page_details.1.secondary_image}}
+                      <img alt="Image" src="{{package.package_page_details.1.secondary_image}}">
+                    {{/if}}
+                    <h5>{{package.package_page_details.1.secondary_title}}</h5>
+                    <span style="color: #fa6160">{{package.package_page_details.1.secondary_subtitle}}</span>
+                  {{else}}
+                    <img alt="Image" src="{{secretEscapes}}">
+                    <h5>Chloe Palmer (Global Head of HR)</h5>
+                    <span style="color: #fa6160">Secret Escapes</span>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

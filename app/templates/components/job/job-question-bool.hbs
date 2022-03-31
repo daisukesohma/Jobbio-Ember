@@ -1,0 +1,15 @@
+<div class="row question bool-question">
+  <div class="col-8 col-sm-8">
+    <h4>{{question.text}}</h4>
+  </div>
+  <div class="col-4">
+    <div class="input-checkbox">
+      {{!-- the hidden input box is to allow for passing the checkbox when it hasn't been selected --}}
+      <input id="jobQuestionHiddenInput{{question.id}}" name="{{question.id}}['{{question.type}}']" type="hidden" value="off">
+      <div class="input-checkbox input-checkbox--switch">
+        <input id="{{question.id}}" type="checkbox" name="{{question.id}}['{{question.type}}']" checked={{checked}} onchange={{ action "checkChanged"}}>
+        <label for="{{question.id}}"></label>
+      </div>
+    </div>
+  </div>
+</div>

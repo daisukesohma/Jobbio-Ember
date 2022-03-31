@@ -1,0 +1,34 @@
+<section class="{{cssPrefix}}imagebg" data-overlay="8">
+  <div class="{{cssPrefix}}background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1;">
+    <img alt="{{cssPrefix}}background" src="{{{backgroundImage}}}">
+  </div>
+  <div class="{{cssPrefix}}container">
+    <div class="{{cssPrefix}}row">
+      <div class="{{cssPrefix}}col-sm-12 {{cssPrefix}}text-center">
+        {{#if job}}
+          <h1>{{job.title}}</h1>
+          <ul class="{{cssPrefix}}list-inline">
+            <li class="{{cssPrefix}}color--primary">
+              <i class="{{cssPrefix}}icon {{cssPrefix}}icon--sm {{cssPrefix}}icon-Suitcase"></i>
+              {{job.company.name}}
+            </li>
+            {{#if job.salary_disclosed}}
+              <li class="{{cssPrefix}}color--primary">
+                <i class="{{cssPrefix}}icon {{cssPrefix}}icon--sm {{cssPrefix}}icon-Coins"></i>
+                {{job.salary_from}}
+              </li>
+            {{/if}}
+            <li class="{{cssPrefix}}color--primary">
+              <i class="{{cssPrefix}}icon {{cssPrefix}}icon--sm {{cssPrefix}}icon-Map-Marker"></i>
+              {{job.company.location.address}}
+            </li>
+          </ul>
+        {{else}}
+          <h1>{{heroLine}}</h1>
+          <h4>{{subLine}}</h4>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
+{{yield}}

@@ -1,0 +1,44 @@
+<div class="col-lg-3 middlecol search-jobs">
+  <div class="section">
+    <div class="job-cards">
+      {{#if objects}}
+      {{#each objects as |job|}}
+      <!-- Starts: row -->
+      {{search/search-job-list-item
+            job=job
+            selectedJob=selectedJob
+            jobQuestionsModalOpened=jobQuestionsModalOpened
+            isMobile=isMobile}}
+      <!-- End: row -->
+      {{/each}}
+      {{#if hasMore}}
+      {{#infinity-loader
+            infinityModel=objects
+            infinityLoad=(action "loadMore")
+            hideOnInfinity=true}}
+        {{search/search-jobs-shimmer}}
+      {{/infinity-loader}}
+      {{/if}}
+      {{else}}
+        {{#if isLoading}}
+          {{search/search-jobs-shimmer}}
+        {{else}}
+          <div class="row boxed boxed--border">
+            <span class="col-12">
+              <h4>No jobs match this search, try again with something else</h4>
+            </span>
+          </div>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+{{#unless objects}}
+  {{#if isLoading}}
+    <div class="col-lg-6 search-job-detail">
+      {{search/search-jobs-detail-shimmer}}
+    </div>
+  {{/if}}
+{{/unless}}
+{{yield}}

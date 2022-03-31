@@ -1,0 +1,27 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h4>{{state}} Channels</h4>
+      </div>
+      <div class="col-6 text-right">
+        {{#link-to "search.results" id="channelCardsViewAllChannels"}}View All Channels{{/link-to}}
+      </div>
+    </div>
+    <div class="row">
+      {{#each objects as |channel|}}
+        <div class="col-sm-4 col-6">
+          {{#link-to "channel" channel.slug id=(concat "channelCardSlugCTA_" channel.id) class="block"}}
+            <div class="feature feature-7 boxed text-center imagebg" data-overlay="4">
+              <div class="background-image-holder" style="background: url({{if channel.card channel.card channel.banner}}); opacity: 1;">
+                <img alt="background" src="{{if channel.card channel.card channel.banner}}">
+              </div>
+              <h4 class="pos-vertical-center wrap">{{channel.name}}</h4>
+            </div>
+          {{/link-to}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{yield}}

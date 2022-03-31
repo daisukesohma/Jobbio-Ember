@@ -1,0 +1,33 @@
+{{outlet}}
+{{common/front-head-search opacity=opacity}}
+{{search/search-bar keywords=model.searchTerm trk=model.trk location=model.location selected=model.selectedLocation jobType=model.jobType model=model}}
+{{search/search-application-submission company=model.company}}
+{{#common/front-main padding=true}}
+  <div class="search-results">
+    <section class="row justify-content-center" style="padding-bottom: 30px;padding-top: 30px">
+      {{search/search-jobs
+              searchTerm=model.searchTerm
+              location=model.location
+              type=model.jobType
+              level=model.jobLevel
+              contract=model.contract
+              date_posted=model.date_posted
+              selectedJob=selectedJob
+              jobs=jobs
+              trk=model.trk
+              jobQuestionsModalOpened=jobQuestionsModalOpened
+              isMobile=isMobile}}
+      {{#unless isMobile}}
+        {{search/search-jobs-detail
+                jobs=jobs
+                selectedJob=selectedJob
+                model=model
+                jobQuestionsModalOpened=jobQuestionsModalOpened}}
+      {{/unless}}
+    </section>
+  </div>
+{{/common/front-main}}
+{{job/job-questions job=selectedJob page='search' jobQuestionsModalOpened=jobQuestionsModalOpened}}
+{{job/job-complete-bio job=selectedJob}}
+{{job/job-complete-bio-pending job=selectedJob}}
+{{common/front-footer}}

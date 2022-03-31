@@ -1,0 +1,123 @@
+{{yield}}
+<section style="height: 100vh" class="imageblock switchable feature-large">
+  <div class="background-image-holder position-fixed" style="background-image:url('{{backgroundImageUrl}}');" data-overlay="{{backgroundOverlay}}">
+    <img alt="image" src="{{backgroundImageUrl}}">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="boxed boxed--lg boxed--border">
+          <div class="col-12 mt-3">
+            <div class="progress-horizontal progress-horizontal--lg">
+              <div class="progress-horizontal__bar" data-value="90"></div>
+            </div>
+          </div>
+          <br>
+          {{#if package}}
+            <h1 style="margin-top:1.3em">{{package.package_page_details.2.title}}</h1>
+            <p class="lead">{{package.package_page_details.2.subtitle}}</p>
+          {{else}}
+            <h1 style="margin-top:1.3em">Last Step, Choose Your Plan</h1>
+            <p class="lead">Hiring a lot? Save money with a package.</p>
+          {{/if}}
+          <form class="form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly." novalidate="true">
+            {{#unless package}}
+              <div class="col-12 package-wrapper">
+                <a href="javascript:void(0)" id="onboardingPaymentSingle" {{action 'setPackage' 'single'}}>
+                  <div class="col-lg-6">
+                    <div class="feature feature-1 boxed boxed--border {{single}}">
+                      <h5>SINGLE</h5>
+                      <p style="color:#666666;font-size:1em;font-weight:400;">
+                        - Post 1 x Job<br>
+                        - 30 Day Expiry
+                      </p>
+                      <hr class="shorty">
+                      <h4>€{{singlePrice.content}} per job</h4>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:void(0)" id="onboardingPaymentUnlimited" {{action 'setPackage' 'unlimited'}}>
+                  <div class="col-lg-6">
+                    <div class="feature feature-1 boxed boxed--border {{unlimited}}">
+                      <h5>UNLIMITED</h5>
+                      <p style="color:#666666;font-size:1em;font-weight:400;">
+                        - Post Unlimited Jobs<br>
+                        - Unlimited Time
+                      </p>
+                      <hr class="shorty">
+                      <h4>€{{unlimitedPrice.content}} per month</h4>
+                      <span class="label">DEAL</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {{/unless}}
+
+            <div class="col-sm-12 col-12 mt--1">
+              <div class="input-icon">
+                <i class="material-icons">person</i>
+                {{input id="onboardingPaymentName" type="text" value=model.name placeholder="Name"}}
+                <small class="onboarding-validation-error">{{errors.name}}</small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <div id="card-element" style="padding-top: 8px;border:1px solid #ececec;background:#fcfcfc;border-radius:6px;padding-left:10px"></div>
+                <small class="onboarding-validation-error">{{errors.number}}</small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">email</i>
+                {{input id="onboardingPaymentEmail" type="text" value=model.email placeholder="Email for receipt (Optional)"}}
+                <small class="onboarding-validation-error">{{errors.email}}</small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">star</i>
+                {{input id="onboardingPaymentCoupon" type="text" value=model.coupon key-up=(action "validateCoupon") placeholder="Coupon (Optional)"}}
+                <small class="onboarding-validation-error">{{errors.coupon}}</small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-12 mt--1">
+              {{#if paying}}
+                {{paper-progress-linear}}
+              {{else}}
+                {{#unless package}}
+                  <button {{action 'submitForm'}} id="onboardingSubmit" class="btn btn--primary type--uppercase onboarding-get-started">
+                    PAY €{{amount}} + VAT
+                  </button>
+                {{else}}
+                  <button {{action 'submitForm'}} id="onboardingSubmit" class="btn btn--primary type--uppercase onboarding-get-started">
+                    PAY {{currencySymbol}}{{packagePrice}} + VAT
+                  </button>
+                {{/unless}}
+              {{/if}}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="row justify-content-md-center">
+          <div class="col-lg-11 text-center">
+            <div class="boxed">
+            {{#if package}}
+              <h1 class="application_count_strap" style="margin-bottom: 1.5em">{{package.package_page_details.2.secondary_title}}</h1>
+              {{#if package.package_page_details.2.counter}}
+                <h1 class="application_count" data-start="2000007" data-per-day="86400"></h1>
+              {{/if}}
+              <h1 class="application_count_strap" style="color: #fa6160">{{package.package_page_details.2.secondary_subtitle}}</h1>
+            {{else}}
+              <h1 class="application_count_strap" style="margin-bottom: 1.5em">Great News... We Have</h1>
+              <h1 class="application_count" data-start="2000007" data-per-day="86400"></h1>
+              <h1 class="application_count_strap" style="color: #fa6160">Talent</h1>
+            {{/if}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

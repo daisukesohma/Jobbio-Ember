@@ -1,0 +1,30 @@
+<section style="padding-top: 30px;">
+	<div class="container">
+		{{#if objects}}
+			<div class="row">
+			{{#each objects as |company|}}
+				{{search/search-company-card company=company}}
+			{{/each}}
+			</div>
+			{{#if hasMore}}
+				{{#infinity-loader
+				infinityModel=objects
+				infinityLoad=(action "loadMore")
+				hideOnInfinity=true}}
+					{{search/search-companies-shimmer}}
+				{{/infinity-loader}}
+			{{/if}}
+		{{else}}
+			{{#if isLoading}}
+				{{search/search-companies-shimmer}}
+			{{else}}
+				<div class="row boxed boxed--border">
+					<span class="col-12">
+						<h4>No companies match this search, try again with something else</h4>
+					</span>
+				</div>
+			{{/if}}
+		{{/if}}
+	</div>
+</section>
+{{yield}}

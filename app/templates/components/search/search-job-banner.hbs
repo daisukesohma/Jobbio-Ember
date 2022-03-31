@@ -1,0 +1,43 @@
+<section class="imagebg job-banner" data-overlay="8">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1 class="wrap" {{action "goToJobPage" model}} style="cursor:pointer;margin-top:50px;font-size:2.1em">{{model.title}}</h1>
+        <ul class="list-inline list-v1">
+          {{#if model.company.customer}}
+            <li class="color--primary" {{action "goToCompanyChannel" model}} style="cursor:pointer"><i class="icon icon--sm icon-Suitcase"></i>{{model.company.name}}</li>
+          {{else}}
+            <li class="color--primary"><i class="icon icon--sm icon-Suitcase"></i>{{model.company.name}}</li>
+          {{/if}}
+          {{#if model.salary_disclosed}}
+            <li style="color: #252525"><i class="icon icon--sm icon-Coins"></i>{{salary}} {{salaryType}}</li>
+          {{/if}}
+          <li style="color: #252525"><i class="icon icon--sm icon-Map-Marker"></i>{{if model.location.city model.location.city model.location.address}}</li>
+        </ul>
+        <div class="buttons">
+          {{#if loading}}
+            {{paper-progress-linear}}
+          {{else}}
+            {{#each buttons as |button|}}
+              {{#if (eq button.type 'default')}}
+                <a id="{{button.bannerID}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                  <span class="btn__text">{{button.text}}</span>
+                </a>
+              {{else if (eq button.type 'linkTo')}}
+                {{#link-to button.route (query-params job=model.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.bannerID class=button.class}}
+                  <span class="btn__text">{{button.text}}</span>
+                {{/link-to}}
+              {{else if (eq button.type 'onClickAction')}}
+                <a id="{{button.bannerID}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                  <span class="btn__text">{{button.text}}</span>
+                </a>
+              {{/if}}
+            {{/each}}
+            {{yield}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{yield}}

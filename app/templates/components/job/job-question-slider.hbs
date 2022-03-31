@@ -1,0 +1,19 @@
+<div class="row question slider-question">
+  <div class="col-12 col-sm-12">
+    <h4>{{question.text}}</h4>
+  </div>
+  <div class="col-12 col-sm-12">
+    <div class="row">
+      <div class="col-3 col-sm-1 value-from">
+        {{slider.value_from}}
+      </div>
+      <div class="col-6 col-sm-10">
+        {{ui-slider value=value min=slider.value_from max=slider.value_to immediateResponse=true}}
+        <input id={{question.id}} name="{{question.id}}['value']" value={{value}} hidden>
+      </div>
+      <div class="col-3 col-sm-1 value-to">
+        {{slider.value_to}}
+      </div>
+    </div>
+  </div>
+</div>

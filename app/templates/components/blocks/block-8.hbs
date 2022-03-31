@@ -1,0 +1,30 @@
+{{yield}}
+<style>
+  #section-{{object.id}} .customPrimaryButtonLargeVideo {
+    background-color: {{object.primary_color}} !important;
+    border-color: {{object.primary_color}} !important;
+  }
+</style>
+<section class="cover height-80 imagebg switchable switchable--switch" id="section-{{object.id}}" data-overlay="{{object.overlay}}" style="{{style}}">
+  <div class="background-image-holder"> <img alt="background" src="{{imageLink}}{{object.background_image}}"> </div>
+  <div class="container pos-vertical-center">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="switchable__text">
+          <h1 style="color: {{object.text_color}}">{{object.title}}</h1>
+          <p class="lead" style="color: {{object.text_color}}">{{object.text}}</p>
+          {{#if (contains object.primary_cta_link 'section-')}}
+            {{scroll-to href=(concat '#' object.primary_cta_link) label=object.primary_cta_text class="btn btn--primary type--uppercase customPrimaryButtonLargeVideo"}}
+          {{else}}
+            <a class="btn btn--primary type--uppercase customPrimaryButtonLargeVideo" href="{{object.primary_cta_link}}"> <span class="btn__text">{{object.primary_cta_text}}</span></a>
+          {{/if}}
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-4 col-12">
+        <div class="video-cover border--round box-shadow-wide">
+          <div class="background-image-holder"> <img alt="image" src="{{imageLink}}{{object.foreground_image}}"> </div>
+          <div class="video-play-icon"></div> <iframe data-src="{{object.video}}" allowfullscreen="allowfullscreen"></iframe> </div>
+      </div>
+    </div>
+  </div>
+</section>

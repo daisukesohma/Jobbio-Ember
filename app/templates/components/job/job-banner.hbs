@@ -1,0 +1,72 @@
+<section class="imagebg job-banner" data-overlay="8">
+  <div class="background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1;">
+    <img alt="background" src="{{{backgroundImage}}}">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1 class="wrap">{{model.title}}</h1>
+        <ul class="list-inline list-v1">
+          <li class="color--primary"><i class="icon icon--sm icon-Suitcase"></i>{{model.company.name}}</li>
+          {{#if model.salary_disclosed}}
+            <li class="color--primary"><i class="icon icon--sm icon-Coins"></i>{{salary}} {{salaryType}}</li>
+          {{/if}}
+          <li class="color--primary"><i class="icon icon--sm icon-Map-Marker"></i>{{if model.location.city model.location.city model.location.address}}</li>
+        </ul>
+        <div class="buttons">
+          {{#each buttons as |button|}}
+            {{#if (eq button.type 'default')}}
+              <a id="{{button.id}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                <span class="btn__text">{{button.text}}</span>
+              </a>
+            {{else if (eq button.type 'linkToApply')}}
+              {{#link-to button.route button.param1 button.param2 (query-params channel=null job=model.id company=model.company.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                <span class="btn__text">{{button.text}}</span>
+              {{/link-to}}
+            {{else if (eq button.type 'linkToRegister')}}
+              {{#link-to button.route (query-params job=model.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                <span class="btn__text">{{button.text}}</span>
+              {{/link-to}}
+            {{else if (eq button.type 'onClickAction')}}
+              <a id="{{button.id}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                <span class="btn__text">{{button.text}}</span>
+              </a>
+            {{/if}}
+          {{/each}}
+          {{yield}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <div id="bottom-fixed-banner" class="bg--primary bottom-fixed">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <div class="buttons">
+          <div class="button-wrapper">
+            {{#each bottomButtons as |button|}}
+              {{#if (eq button.type 'default')}}
+                <a id="{{button.buttonID}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                  <span class="btn__text">{{button.text}}</span>
+                </a>
+              {{else if (eq button.type 'linkToApply')}}
+                {{#link-to button.route button.param1 button.param2 (query-params channel=null job=model.id company=model.company.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.buttonID class=button.class}}
+                  <span class="btn__text">{{button.text}}</span>
+                {{/link-to}}
+              {{else if (eq button.type 'linkToRegister')}}
+                {{#link-to button.route (query-params job=model.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.buttonID class=button.class}}
+                  <span class="btn__text">{{button.text}}</span>
+                {{/link-to}}
+              {{else if (eq button.type 'onClickAction')}}
+                <a id="{{button.buttonID}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                  <span class="btn__text">{{button.text}}</span>
+                </a>
+              {{/if}}
+            {{/each}}
+          </div>
+          {{yield}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{yield}}

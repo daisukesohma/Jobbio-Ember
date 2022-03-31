@@ -1,0 +1,51 @@
+{{outlet}}
+<div class="main-container">
+  <section class="height-100 imagebg text-center" data-overlay="4">
+    <div class="background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1;">
+      <img alt="background" src="{{{backgroundImage}}}" />
+    </div>
+    <div class="container pos-vertical-center">
+      <div class="row">
+        <div class="col-sm-7 col-md-5">
+          <h2>Login to continue</h2>
+          <form class="login-form" {{action 'authenticate' on='submit'}} id="loginForm">
+            <div class="row">
+              <div class="col-sm-12">
+                {{input id='email' name='email' placeholder='Email' value=identification}}
+              </div>
+              <div class="col-sm-12">
+                <div class="input-icon {{if focused 'password-icon-active'}}">
+                  <a tabindex="-1" href="javascript:void(0)" {{action 'passwordVisibility' visible}}><i class="cursor-hand material-icons">visibility</i></a>
+                  {{input id="password" focus-in=(action "focus" true) focus-out=(action "focus" false) type=visible id='password' name="password" value=password placeholder="Password"}}
+                  {{#if response}}
+                    <label class="invalid-credentials" style="line-height: 1.5;margin-top: 10px;font-size: 1em;">
+                      Your login credentials were incorrect.
+                      <br>
+                      Please try again or click on the link below to reset your password.
+                    </label>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="col-sm-12">
+                {{#if logging}}
+                  {{paper-progress-linear}}
+                {{else}}
+                  <button id="logInButton" class="btn btn--primary type--uppercase" type="submit">Login</button>
+                {{/if}}
+              </div>
+            </div>
+            <!--end of row-->
+          </form>
+          <span class="type--fine-print block">Not registered?
+            {{#link-to "talent.register" id="logInCreateAccount"}}Create an account now{{/link-to}}
+          </span>
+          <span class="type--fine-print block">Forgot your password?
+            {{#link-to "user.forgot-password" id="logInRecoverAccount"}}Recover your account{{/link-to}}
+          </span>
+        </div>
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </section>
+</div>

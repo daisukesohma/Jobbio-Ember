@@ -1,0 +1,18 @@
+{{outlet}}
+
+<section class="height-100 bg--light text-center" id="404">
+	<div class="container pos-vertical-center">
+		<div class="row">
+			<div class="col-sm-12">
+        {{#if model.success}}
+  				<h1 class="h1--large">{{model.response.header}}</h1>
+					<p class="lead">{{model.response.text}}</p>
+        {{else}}
+          <h1 class="h1--large">Application Not Processed</h1>
+  				<p class="lead">This application wasn't processed, please try again later.</p>
+        {{/if}}
+				<a id="ctaBackToHomePage" href="/">Go back to home page</a>
+			</div>
+		</div><!--end of row-->
+	</div><!--end of container-->
+</section>

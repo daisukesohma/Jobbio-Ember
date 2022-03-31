@@ -1,0 +1,133 @@
+<div class="main-container">
+  <section class="switchable switchable--switch imagebg" data-overlay="9">
+    <div class="background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1;">
+      <img alt="background" src="{{{backgroundImage}}}">
+    </div>
+    <div class="container company-registration">
+      <div class="row">
+        {{company/register-left-panel model=model}}
+        <div class="col-md-6">
+          <div class="boxed boxed--lg bg--white boxed--border boxed-form">
+            {{#if model.package.form_title}}
+              <h4>{{model.package.form_title}}</h4>
+            {{else}}
+              <h4>Get Started Now</h4>
+            {{/if}}
+            <form {{action "register" post on="submit"}} class="registrationForm">
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">star</i>
+                    {{input id="registerRecruiterName" type="text" name="name" value=name placeholder="Company Name"}}
+                    {{#if errors.company_name}}
+                      <label class="registration-validation-error">
+                        {{errors.company_name}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div style="clear: both"></div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">person</i>
+                    {{input id="registerRecruiterFirstName" type="text" name="first_name" value=first_name placeholder="First Name"}}
+                    {{#if errors.first_name}}
+                      <label class="registration-validation-error">
+                        {{errors.first_name}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">person_outline</i>
+                    {{input id="registerRecruiterLastName" type="text" name="last_name" value=last_name placeholder="Last Name"}}
+                    {{#if errors.last_name}}
+                      <label class="registration-validation-error">
+                        {{errors.last_name}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">email</i>
+                    {{input id="registerRecruiterEmail" type="email" name="email" value=email placeholder="Email Address"}}
+                    {{#if errors.email}}
+                      <label class="registration-validation-error">
+                        {{errors.email}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">phone</i>
+                    {{input id="registerRecruiterPhone" type="text" name="phone" value=phone placeholder="Contact Number"}}
+                    {{#if errors.phone}}
+                      <label class="registration-validation-error">
+                        {{errors.phone}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon {{if focused 'password-icon-active'}}">
+                    <a tabindex="-1" href="javascript:void(0)" {{action 'passwordVisibility' visible}}>
+                      <i class="cursor-hand material-icons">visibility</i>
+                    </a>
+                    {{input id="registerRecruiterPassword" focus-in=(action "focus" true) focus-out=(action "focus" false) type=visible name="password" value=password placeholder="Password"}}
+                    {{#unless errors.password}}
+                      <small class="text-muted password-subtitle">
+                        Password must contain a minimum of 6 characters with at least 1 letter and 1 number
+                      </small>
+                    {{/unless}}
+                    {{#if errors.password}}
+                      <label class="registration-validation-error">
+                        {{errors.password}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-icon">
+                    <i class="material-icons">add_location</i>
+                    {{g-autocomplete name="add_ress" value=address on-select=(action "didUpdatePlace") id='add_ress' class='form-control' on-select-error=(action "invalidUserSelection")}}
+                    {{#if errors.address}}
+                      <label class="registration-validation-error">
+                        {{errors.address}}
+                      </label>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-checkbox-wrapper">
+                    <div class="input-checkbox">
+                      <input id="input-assigned-0" type="checkbox" required name="terms" {{action 'agree' on="change"}}> <label for="input-assigned-0"></label>
+                    </div>
+                    <span>I accept the {{#link-to 'terms' id="registerRecruiterTCs"}}Terms &amp; Conditions{{/link-to}} and {{#link-to 'privacy-policy'}}Privacy Policy{{/link-to}}</span>
+                    {{#if errors.terms}}<label class="registration-validation-error">{{errors.terms}}</label>{{/if}}
+                  </div>
+                </div>
+                <div class="col-12">
+                  {{#if registering}}
+                    <span class="btn__text">{{paper-progress-linear}}</span>
+                  {{else}}
+                    <button id="registerRecruiterSubmit" type="submit" class="btn btn--primary">
+                      {{#if model.package.customizable}}
+                        {{model.package.cta}}
+                      {{else}}
+                        Get Started
+                      {{/if}}
+                    </button>
+                  {{/if}}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{outlet}}

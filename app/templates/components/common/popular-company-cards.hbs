@@ -1,0 +1,20 @@
+<section class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8">
+        <h1>Popular Companies</h1>
+        <p class="lead">Can't find what you are looking for, try our <a href="/search">Job Search</a> or <a href="/pricing">Post A Free Job</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      {{#each objects as |company|}}
+        {{common/popular-company-card company=company}}
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{yield}}

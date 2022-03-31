@@ -1,0 +1,7 @@
+{{outlet}}
+{{#if model.popular}}
+  {{common/popular-company-cards state=model.state featured=model.featured location=model.location}}
+{{else}}
+  {{company/company-cards state=model.state featured=model.featured location=model.location}}
+{{/if}}
+{{common/front-footer}}

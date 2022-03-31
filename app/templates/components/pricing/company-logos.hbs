@@ -1,0 +1,36 @@
+{{yield}} 
+<section class="text-center imagebg parallax" data-overlay="0">
+  <div class="background-image-holder"> <img alt="background" src="{{imageLocation}}images2/site/content-pages/partner-high.png"> </div>
+  <div class="containerr">
+    <div class="row">
+      <div class="col-md-10 col-lg-8">
+        <h1>You're In Good Company</h1>
+        <p class="lead">Some of the worlds best companies trust us with their growth.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{#swiper-container options=myOptions}}
+          {{#each brands as |brand|}}
+            {{#swiper-slide}}
+              <img alt="Image" class="image--md" src="{{brand.url}}">
+            {{/swiper-slide}}
+          {{/each}}
+        {{/swiper-container}}
+        <!--          <div class="slider slider--inline-arrows slider--arrows-hover text-center" data-paging="true" data-arrows="true" data-timing="5000">-->
+        <!--            <ul class="slides">-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/slack.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/airbnb.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/ryanair.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/pwc.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/amazon-web-services.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/asana.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/fidelity.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/jamerson.png"> </li>-->
+        <!--              <li class="col-md-3 col-6"> <img alt="Image" class="image--s" src="{{imageLocation}}images2/site/content-pages/qualtrics.png"> </li>-->
+        <!--            </ul>-->
+        <!--          </div>-->
+      </div>
+    </div>
+  </div>
+</section>

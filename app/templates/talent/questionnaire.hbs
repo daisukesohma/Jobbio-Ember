@@ -1,0 +1,29 @@
+{{outlet}}
+<div class="main-container">
+  <a id="banner" class="in-page-link"></a>
+  <section class="cover text-left height-40 parallax">
+    <div class="container text-center pos-vertical-center">
+      <div class="row">
+        <div class="col-12">
+          <h1>Talent Screening</h1>
+          <h2>Job Title @ Company Name</h2>
+          <h3>Please, follow the instructions below</h3>
+          <p>Each section has a video question and an answer section for that question.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{#each model.job.questions as |question index|}}
+    {{#if (eq question.type 'video')}}
+      <section class="cover height-60  switchable">
+        <div class="container pos-vertical-center">
+          <div class="row">
+            {{! {{common/video-player index=index question=question}}
+            {{! {{common/video-recorder index=index question=question}}
+          </div>
+        </div>
+      </section><br>
+    {{/if}}
+  {{/each}}
+  {{common/front-footer}}
+</div>

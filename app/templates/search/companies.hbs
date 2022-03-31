@@ -1,0 +1,8 @@
+{{outlet}}
+{{common/front-head-search opacity=opacity}}
+{{search/search-bar keywords=model.searchTerm trk=model.trk location=model.location selected=model.selectedLocation jobType=model.jobType model=model}}
+{{search/search-application-submission company=model.company}}
+{{#common/front-main}}
+  {{search/search-companies searchTerm=model.searchTerm trk=model.trk location=model.location}}
+{{/common/front-main}}
+{{common/front-footer}}

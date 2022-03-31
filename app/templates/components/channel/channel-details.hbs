@@ -1,0 +1,53 @@
+<div class="{{cssPrefix}}col-md-3 {{cssPrefix}}col-md-push-9 channel-details {{cssPrefix}}rightcol {{cssPrefix}}sticky-sidebar-rightcol">
+  {{#sticky-container options=myStickyOptions }}
+    <div class="{{cssPrefix}}sidebar__inner">
+      <div class="{{cssPrefix}}jobs">
+        <div class="{{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}text-center">
+          {{channel/channel-logo channel=channel prefixCSS=prefixCSS}}
+          <h4 class="{{cssPrefix}}unmarg wrap">{{title}}</h4>
+          <div class="buttons t-p-26">
+            {{#unless embed}}
+              {{#unless isAdmin}}
+                {{#if isNotCompanyMember}}
+                  {{#unless (eq channel.company.status "frozen")}}
+                    {{#if session.isAuthenticated}}
+                      {{#if channel.is_following}}
+                        <a id="channelDetailsUnfollowButton" class="btn btn--primary btn--sm btn-block" href="javascript:void(0)" onclick={{ action "unfollow" channel.id}}>
+                          <span class="btn__text">Unfollow</span>
+                        </a>
+                      {{else}}
+                        <a id="channelDetailsFollowButton" class="btn btn--primary btn--sm btn-block" href="javascript:void(0)" onclick={{ action "follow" channel.id}}>
+                          <span class="btn__text">Follow</span>
+                        </a>
+                      {{/if}}
+                    {{else}}
+                      {{#link-to 'talent.register' (query-params channel=channel.slug job=null company=null ccuid=null source=channel.slug) id="channelDetailsFollowCTA" class="btn btn--primary btn--sm btn-block"}}
+                        <span class="btn__text">Follow</span>
+                      {{/link-to}}
+                    {{/if}}
+                  {{/unless}}
+                {{/if}}
+                {{#if isNotTalent}}
+                  {{#if isCompanyMember}}
+                    {{#if isTopicChannel}}
+                      <a id="channelDetailsAddJobButton" class="btn btn--primary btn--sm btn-block" href="javascript:void(0)" onclick={{ action "addJob" channel.id}}>
+                        <span class="btn__text">Add Your Job</span>
+                      </a>
+                    {{/if}}
+                  {{else}}
+                    {{#if isTopicChannel}}
+                      {{#link-to 'company.register' (query-params channel=channel.slug source=channel.slug) id="channelDetailsAddJobCTA" class="btn btn--primary btn--sm btn-block"}}
+                        <span class="btn__text">Add Your Job</span>
+                      {{/link-to}}
+                    {{/if}}
+                  {{/if}}
+                {{/if}}
+              {{/unless}}
+            {{/unless}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/sticky-container}}
+</div>
+{{yield}}

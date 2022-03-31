@@ -1,0 +1,10 @@
+<div class="job-list-item">
+  <div class="row boxed boxed--border" {{action "selectJob" job}} style="{{selectedJobBorder}};padding-top: 1.5em;padding-bottom: 1.3em;">
+    {{search/search-job-list-item-detail
+      job=job
+      selectedJob=selectedJob
+      jobQuestionsModalOpened=jobQuestionsModalOpened
+      isMobile=isMobile}}
+  </div>
+</div>
+{{yield}}

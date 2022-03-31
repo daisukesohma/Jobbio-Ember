@@ -1,0 +1,54 @@
+{{yield}}
+<section class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-8">
+        <h1>Fair & Flexible Pricing</h1>
+        <p class="lead">Choose a plan that suits your hiring needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="pricing pricing-2 boxed boxed--border boxed--lg row no-gutters">
+          <div class="col-xl-5 text-center">
+            <h5>{{singleJob.title}}</h5> <span class="h1"><span class="pricing__dollar">€</span>{{singleJob.price}}</span>
+            {{#link-to 'company.onboarding' (query-params package=singleJob.slug) id='productPricingPerJob' class='btn btn--primary'}}<span class="btn__text">POST A JOB</span>{{/link-to}}
+          </div>
+          <div class="col-xl-7">
+            <ul>
+                {{#each singleJob.package_page_details.0.package_info as |info|}}
+                    <li><span class="checkmark bg--primary-1"></span><span>{{info.text}}</span></li>
+                {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="pricing pricing-2 boxed boxed--border boxed--lg row no-gutters"> <span class="label">DEAL</span>
+          <div class="col-xl-5 text-center">
+            <h5>{{subscription.title}}</h5> <span class="h1"><span class="pricing__dollar">€</span>{{subscription.price}}</span>
+            {{#link-to 'company.onboarding' (query-params package=subscription.slug) id='productPricingPerMonth' class='btn btn--primary'}}<span class="btn__text">POST YOUR JOBS</span>{{/link-to}}
+          </div>
+          <div class="col-xl-7">
+            <ul>
+              {{#each subscription.package_page_details.0.package_info as |info|}}
+                  <li><span class="checkmark bg--primary-1"></span><span>{{info.text}}</span></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12 text-center mt--3">
+      <a id="productPricingSeeFeatures" {{action 'seeAllFeatures'}} class="btn btn--secondary type--uppercase">
+        <span class="btn__text">See All Features</span>
+      </a>
+    </div>
+  </div>
+</section>

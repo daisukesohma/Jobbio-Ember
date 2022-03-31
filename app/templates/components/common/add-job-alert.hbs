@@ -1,0 +1,22 @@
+{{yield}}
+<!-- Starts: Add Job Modal -->
+<div class="new-modal-overlay modal fade" id="addJobAlert" tabindex="-1" role="dialog" aria-labelledby="addJobAlert" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button id="addJobAlertCloseButton" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div class="modal-header">
+        <h3>Add your job to {{channel.name}}</h3>
+      </div>
+      <div class="modal-body">
+        <p class="lead">Your request has been received.</p>
+        <p class="lead">Our account managment team will be in touch.</p>
+      </div>
+      <div class="modal-footer">
+        <a id="addJobAlertCloseCTA" data-dismiss="modal" class="btn btn--sm type--uppercase">
+          <span class="btn__text">Close</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End: Add Job Modal -->

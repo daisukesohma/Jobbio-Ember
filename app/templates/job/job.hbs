@@ -1,0 +1,16 @@
+{{outlet}}
+{{job/job-head model=model}}
+<div class="main-container">
+  {{job/job-banner model=model}}
+  {{#job/job-container}}
+    {{#job/job-company model=model}}
+    {{/job/job-company}}
+    {{job/job-main job=model}}
+    {{job/job-other company=model.company current_job_id=model.id title="Other Jobs" linkToChannel=true}}
+  {{/job/job-container}}
+  {{job/job-location address=model.location.address latitude=location.latitude}}
+  {{job/job-foot company=model.company}}
+  {{job/job-questions job=model}}
+  {{job/job-complete-bio job=model}}
+  {{common/front-footer}}
+</div>

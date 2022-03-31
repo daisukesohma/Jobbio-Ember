@@ -1,0 +1,448 @@
+{{#if job}}
+  {{!-- header --}}
+  <div class="nav-container top-nav talent-registration-v2-bar">
+    <nav id="menu1" class="bar bar-1">
+      <div class="container text-center-xs">
+        <div class="row">
+          <div class="col-lg-1 col-md-2">
+            {{#link-to "channel" model.job.company.slug id='registerTopNavLogo'}}
+              {{common/company-logo company=model.job.company}}
+            {{/link-to}}
+          </div>
+          <div class="col-lg-11 col-md-10 text-right text-center-xs text-center-sm">
+            <h4>{{model.job.title}}</h4>
+            <div class="imagebg">
+              <ul class="list-inline">
+                <li><i class="icon icon--sm icon-Suitcase"></i>{{model.job.company.name}}</li>
+                {{#if model.job.salary_disclosed}}
+                  <li><i class="icon icon--sm icon-Coins"></i>{{salary}}</li>
+                {{/if}}
+                <li><i class="icon icon--sm icon-Map-Marker"></i>{{model.job.location.country}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  {{!-- main container --}}
+  <style type="text/css">
+    body {
+      background-color: #f8f8f8;
+    }
+  </style>
+  <div class="main-container fixed-data-overlay">
+    <div class="container talent-registration v2">
+      <div class="row mt--1 sticky-sidebars">
+        {{!-- Starts : left column --}}
+        <div class="col-md-6 leftcol">
+          <div class="boxed">
+            <div class="job-details text-left">
+              {{{model.job.description}}}
+            </div>
+          </div>
+        </div>
+        {{!-- End : left column --}}
+        {{!-- Starts : right column --}}
+        <div class="col-md-6 rightcol sticky-sidebar-rightcol-off">
+          {{#sticky-container options=myStickyOptions}}
+            <div class="sidebar__inner-off">
+              <form {{action "register" post on="submit"}} class="registrationForm" id="registrationForm">
+
+                {{#if questions}}
+                <!-- starts : box1 -->
+                <div class="boxed boxed--lg bg--white boxed-form" style="margin-top:0;">
+                  {{!-- start: questions --}}
+                  <div class="row norowmargin">
+                    <div class="questions col-12">
+                        <h3>Application Questions</h3>
+                        <hr class="short">
+                        {{#each questions as |question index|}}
+                          <div class="question">
+                            <label>
+                              <i class="icon icon--sm icon-Right-2"></i>
+                              <span>Question {{sum index 1}}</span> - {{{question.text}}}
+                            </label>
+                            {{#if (eq question.type 'text')}}
+                              {{textarea id=question.id name=(concat question.id '[text]') placeholder='Answer' value=question.answer class='form-control' rows='5'}}
+                            {{else if (eq question.type 'single_select')}}
+                              <div class="input-select select-question">
+                                <select id={{"question.id"}} name="{{question.id}}[single]">
+                                  <option value="">Select An Option</option>
+                                  {{#each question.options as |option|}}
+                                    <option value="{{option.id}}">{{option.text}}</option>
+                                  {{/each}}
+                                </select>
+                              </div>
+                            {{else if (eq question.type 'multi_select')}}
+                              <div class="checkbox-question">
+                                {{#each question.options as |option|}}
+                                  <div class="row norowmargin">
+                                    <div class="col-12 col-sm-12">
+                                      <div class="input-checkbox">
+                                        <input id="{{question.id}}_{{option.id}}" name="{{question.id}}[multi]" value="{{option.id}}" type="checkbox">
+                                        <label for="{{question.id}}_{{option.id}}">
+                                          <span class="input__label">{{option.text}}</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                {{/each}}
+                              </div>
+                            {{else if (eq question.type 'range')}}
+                              <div class="input-range row range-question">
+                                {{#each question.options as |option|}}
+                                  <div class="col-3 col-sm-2 text-left price">{{option.value_from}}</div>
+                                  <div class="col-6 col-sm-8" style="margin-top: 15px">
+                                    {{range-slider
+                                        value=option.value
+                                        min=option.value_from
+                                        max=option.value_to
+                                        immediateResponse=true
+                                      }}
+                                    <input id="{{question.id}}_from" name="{{question.id}}['value_from']" value={{option.value.firstObject}} hidden>
+                                    <input id="{{question.id}}_to" name="{{question.id}}['value_to']" value={{option.value.lastObject}} hidden>
+                                  </div>
+                                  <div class="col-3 col-sm-2 text-right price">{{option.value_to}}</div>
+                                {{/each}}
+                              </div>
+                            {{else if (eq question.type 'slider')}}
+                              <div class="input-range row slider-question">
+                                {{#each question.options as |option|}}
+                                  <div class="col-3 col-sm-2 text-left price">{{option.value_from}}</div>
+                                  <div class="col-6 col-sm-8" style="margin-top: 15px">
+                                    {{ui-slider
+                                        value=option.value
+                                        min=option.value_from
+                                        max=option.value_to
+                                        immediateResponse=true
+                                      }}
+                                    <input id={{question.id}} name="{{question.id}}['value']" value={{option.value}} hidden>
+                                  </div>
+                                  <div class="col-3 col-sm-2 text-right price">{{option.value_to}}</div>
+                                {{/each}}
+                              </div>
+                            {{else}}
+                              <div class="row norowmargin bool-question">
+                                <div class="col-4 col-sm-3">
+                                  <div class="input-radio">
+                                    <input type="radio" name="{{question.id}}['{{question.type}}']" id="{{question.id}}_on" value="on" checked>
+                                    <label for="{{question.id}}_on">
+                                      <span class="input__label">
+                                        {{#if (eq question.type 'bool_yn')}}
+                                          Yes
+                                        {{else}}
+                                          True
+                                        {{/if}}
+                                      </span>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="col-4 col-sm-3">
+                                  <div class="input-radio">
+                                    <input type="radio" name="{{question.id}}['{{question.type}}']" id="{{question.id}}_off" value="off">
+                                    <label for="{{question.id}}_off">
+                                      <span class="input__label">
+                                        {{#if (eq question.type 'bool_yn')}}
+                                          No
+                                        {{else}}
+                                          False
+                                        {{/if}}
+                                      </span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            {{/if}}
+                          </div>
+                        {{/each}}
+                      <small class="validation-error-message questions" style="display: none">
+                        Please answer all the questions before submitting your application
+                      </small>
+                    </div>
+                  </div>
+                  {{!-- end: questions --}}
+                </div>
+                <!-- end : box1 -->
+                {{/if}}
+
+                <!-- starts : box2 -->
+                <div class="boxed boxed--lg bg--white boxed-form">
+                  <h3>{{model.job.company.name}} Application</h3>
+                  <p>Jobbio makes it easier for you to apply - {{#link-to 'user.login' class='link-red-u'}}Already Have An Account{{/link-to}}</p>
+                  <div class="row norowmargin">
+                    <div class="col-12 col-sm-6">
+                      <div class="input-icon">
+                        <i class="material-icons">person</i>
+                        {{input id="first_name" type="text" name="first_name" value=first_name placeholder="First Name"}}
+                        {{#if errors.first_name}}<label class="registration-validation-error">{{errors.first_name}}</label>{{/if}}
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <div class="input-icon">
+                        <i class="material-icons">person</i>
+                        {{input id="last_name" type="text" name="last_name" value=last_name placeholder="Last Name"}}
+                        {{#if errors.last_name}}<label class="registration-validation-error">{{errors.last_name}}</label>{{/if}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row norowmargin">
+                    <div class="col-12 col-sm-6">
+                      <div class="input-icon">
+                        <i class="material-icons">email</i>
+                        {{input id="email" type="email" name="email" value=email placeholder="Email Address"}}
+                        {{#if errors.email}}<label class="registration-validation-error">{{errors.email}}</label>{{/if}}
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <div class="input-icon">
+                        <a tabindex="-1" href="javascript:void(0)" {{action 'passwordVisibility' visible}}>
+                          <i class="cursor-hand material-icons">visibility</i>
+                        </a>
+                        {{input id="password" focus-in=(action "focus" true) focus-out=(action "focus" false) type=visible name="password" value=password placeholder="Password"}}
+                        {{#if errors.password}}<label class="registration-validation-error">{{errors.password}}</label>{{/if}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row norowmargin">
+                    <div class="col-12 col-sm-12">
+                      <div class="input-icon">
+                        <i class="material-icons">add_location</i>
+                        {{g-autocomplete id="add_ress" value=address on-select=(action "didUpdatePlace") name="add_ress" class='' on-select-error=(action "invalidUserSelection")}}
+                        {{#if errors.address}}<label class="registration-validation-error">{{errors.address}}</label>{{/if}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row norowmargin" style="padding-bottom: 32px">
+                    <div class="col-12 col-sm-12">
+                      <div class="text-block text-center">
+                        <div class="input-icon">
+                          {{#file-upload name="cv" id="cv" accept="text/plain,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onfileadd=(action "fileAdded")}}
+                            <a id="upload-cv" tabindex=0 style="font-size: 14px; padding-right: 0.2em;cursor: pointer;">
+                              <i class="material-icons" style="position: relative;padding-right: 0.5em;cursor: pointer;">description</i>
+                              {{#if cvFile}}
+                                Update CV
+                              {{else}}
+                                Attach your CV
+                              {{/if}}
+                            </a>
+                          {{/file-upload}}
+                          {{#if cvFile}}
+                            ({{cvFile.name}})
+                          {{else}}
+                            (Optional)
+                          {{/if}}
+                        </div>
+                        {{#if errors.cv}}
+                          <label class="registration-validation-error">{{errors.cv}}</label>
+                        {{/if}}
+                      </div>
+                    </div>
+                  </div>
+                  {{!-- start: Terms and Conditions --}}
+                  <div class="row norowmargin">
+                    <div class="col-12 text-center">
+                      <div class="input-checkbox">
+                        <input id="input-assigned-0" type="checkbox" {{ action 'didAgree' on="change"}}>
+                        <label for="input-assigned-0"></label>
+                      </div>
+                      {{#if (eq model.source 'tw')}}
+                        <span>I accept Jobbio's {{#link-to 'terms' id="registerTalentTCs" target="_blank"}}Terms &amp; Conditions{{/link-to}} and Jobbio's {{#link-to 'privacy-policy' id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                      {{else if (eq model.source 'cw')}}
+                        <span>I accept Jobbio's {{#link-to 'terms' id="registerTalentTCs" target="_blank"}}Terms &amp; Conditions{{/link-to}} and Jobbio's {{#link-to 'privacy-policy' id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                      {{else if (eq model.source 'da')}}
+                        <span>I accept Jobbio's {{#link-to 'terms' id="registerTalentTCs" target="_blank"}}Terms &amp; Conditions{{/link-to}} and Jobbio's {{#link-to 'privacy-policy' id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                      {{else}}
+                        <span>I accept the {{#link-to 'terms' id="registerTalentTCs" target="_blank"}}Terms &amp; Conditions{{/link-to}} and the {{#link-to 'privacy-policy' id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                      {{/if}}
+                      <small class="validation-error-message agree" style="display: none">
+                        You must agree to the terms and conditions before registering!
+                      </small>
+                    </div>
+                  </div>
+                  {{!-- end: Terms and Conditions --}}
+                  {{#if applying}}
+                    <div class="row norowmargin">
+                      <div class="col-12">
+                        {{paper-progress-linear}}
+                      </div>
+                    </div>
+                  {{else}}
+                    {{#unless (or (eq model.job.application_status 'submitted') (eq model.job.application_status 'pending'))}}
+                      <div class="row norowmargin">
+                        <div class="col-12">
+                          <button id="continueApplication" type="submit" class="mt--1 btn btn--primary" style="display: inline-block;">
+                            Continue My Application
+                          </button>
+                        </div>
+                      </div>
+                    {{/unless}}
+                  {{/if}}
+                </div>
+                <!-- end : box2 -->
+              </form>
+            </div>
+          {{/sticky-container}}
+        </div>
+        {{!-- End : right column --}}
+      </div>
+    </div>
+  </div>
+  {{!-- bottom left floating search button --}}
+  {{#if (eq model.job.type.name 'undefined')}}
+    <div class="register-bottom-left-search">
+      {{#link-to 'search.results' id='registerBottomLeftSearch' class='btn type--uppercase'}}
+        <span class="icon-Magnifi-Glass2" style="margin-right: 5px;"></span>
+        <span>View Other Jobs</span>
+      {{/link-to}}
+    </div>
+  {{else}}
+    <div class="register-bottom-left-search">
+      {{#link-to 'search.results' (query-params type=model.job.type.name) id='registerBottomLeftSearch' class='btn type--uppercase'}}
+        <span class="icon-Magnifi-Glass2" style="margin-right: 5px;"></span>
+        <span>View Other Jobs</span>
+      {{/link-to}}
+    </div>
+  {{/if}}
+  {{talent/register-application-pop job=model.job}}
+{{else}}
+  <div class="main-container">
+    <section class="switchable switchable--switch imagebg" data-overlay="5">
+      <div class="background-image-holder" style="background: url('{{{backgroundImage}}}'); opacity: 1; position: fixed;">
+        <img alt="background" src="{{{backgroundImage}}}">
+      </div>
+      <div class="container talent-registration">
+        <div class="row justify-content-between">
+          {{talent/register-left-panel model=model}}
+          <div class="col-sm-6">
+          {{#sticky-container options=myStickyOptions}}
+            <div class="col-sm-12 right-side">
+              <div class="boxed boxed--lg bg--white boxed--border boxed-form talent-register-form">
+                <h4>
+                  {{#if model.job}}
+                    You're Almost There!
+                  {{else}}
+                    Start building your Jobbio profile today!
+                  {{/if}}
+                </h4>
+                {{#if model.job}}
+                  <p>What contact details would you like {{model.job.company.name}} to reach you at for the {{model.job.title}} position?</p>
+                {{else}}
+                  <p>Apply directly and privately to multiple companies with one click!</p>
+                {{/if}}
+                <form {{action "register" post on="submit"}} class="registrationForm">
+                  <div class="row">
+                    <div class="col-md-12 col-12">
+                      <div class="input-icon">
+                        <i class="material-icons">person</i>
+                        {{input id="first_name" type="text" name="first_name" value=first_name placeholder="First Name"}}
+                        {{#if errors.first_name}}<label class="registration-validation-error">{{errors.first_name}}</label>{{/if}}
+                      </div>
+                    </div>
+                    <div style="clear: both"></div>
+                    <div class="col-md-12 col-12">
+                      <div class="input-icon">
+                        <i class="material-icons">person_outline</i>
+                        {{input id="last_name" type="text" name="last_name" value=last_name placeholder="Last Name"}}
+                        {{#if errors.last_name}}<label class="registration-validation-error">{{errors.last_name}}</label>{{/if}}
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-12">
+                      <div class="input-icon">
+                        <i class="material-icons">email</i>
+                        {{input id="email" type="email" name="email" value=email placeholder="Email Address"}}
+                        {{#if errors.email}}<label class="registration-validation-error">{{errors.email}}</label>{{/if}}
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-12">
+                      <div class="input-icon {{if focused 'password-icon-active'}}">
+                        <a tabindex="-1" href="javascript:void(0)" {{action 'passwordVisibility' visible}}>
+                          <i class="cursor-hand material-icons">visibility</i>
+                        </a>
+                        {{input id="password" focus-in=(action "focus" true) focus-out=(action "focus" false) type=visible name="password" value=password placeholder="Password"}}
+                        {{#unless errors.password}}
+                          <small class="text-muted password-subtitle">
+                            Password must contain a minimum of 6 characters with at least 1 letter and 1 number
+                          </small>
+                        {{else}}
+                          <label class="registration-validation-error">
+                            {{errors.password}}
+                          </label>
+                        {{/unless}}
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-12">
+                      <div class="input-icon">
+                        <i class="material-icons">add_location</i>
+                        {{g-autocomplete id="add_ress" value=address on-select=(action "didUpdatePlace") name="add_ress" class='form-control' on-select-error=(action "invalidUserSelection")}}
+                        {{#if errors.address}}<label class="registration-validation-error">{{errors.address}}</label>{{/if}}
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-12">
+                      <div class="input-checkbox-wrapper">
+                        <div class="input-checkbox">
+                          <input id="input-assigned-0" type="checkbox" {{ action 'didAgree' on="change"}}>
+                          <label for="input-assigned-0"></label>
+                        </div>
+                        {{#if (eq model.source 'tw')}}
+                          <span>I accept Jobbio's {{#link-to 'terms' id="registerTalentTCs"  target="_blank"}}Terms &amp; Conditions{{/link-to}} and Jobbio's {{#link-to 'privacy-policy'  id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                        {{else if (eq model.source 'cw')}}
+                          <span>I accept Jobbio's {{#link-to 'terms' id="registerTalentTCs"  target="_blank"}}Terms &amp; Conditions{{/link-to}} and Jobbio's {{#link-to 'privacy-policy'  id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                        {{else if (eq model.source 'da')}}
+                          <span>I accept Jobbio's {{#link-to 'terms' id="registerTalentTCs"  target="_blank"}}Terms &amp; Conditions{{/link-to}} and Jobbio's {{#link-to 'privacy-policy'  id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                        {{else}}
+                          <span>I accept the {{#link-to 'terms' id="registerTalentTCs"  target="_blank"}}Terms &amp; Conditions{{/link-to}} and the {{#link-to 'privacy-policy'  id="registerTalentPP" target="_blank"}}Privacy Policy{{/link-to}}</span>
+                        {{/if}}
+                        <small class="validation-error-message agree" style="display: none">
+                          You must agree to the terms and conditions before registering!
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-12">
+                      {{#if registering}}
+                        <span class="btn__text">{{paper-progress-linear}}</span>
+                      {{else}}
+                        {{#if model.job}}
+                          <button id="applyOnJobbioJob" type="submit" class="btn btn--primary" style="display: inline-block;margin-bottom: 10px;">
+                            {{#if (eq model.source 'tw')}}
+                              Apply on Jobbio
+                            {{else if (eq model.source 'cw')}}
+                              Apply on Jobbio
+                            {{else if (eq model.source 'da')}}
+                              Apply on Jobbio
+                            {{else}}
+                              Apply
+                            {{/if}}
+                          </button>
+                          <div>
+                            {{#link-to "user.login" class="btn btn-secondary btn-fw"}}
+                              <span class="btn__text">I already have a Jobbio account</span>
+                            {{/link-to}}
+                          </div>
+                        {{else}}
+                          <button id="applyOnJobbio" type="submit" class="btn btn--primary">
+                            {{#if (eq model.source 'tw')}}
+                              Apply on Jobbio
+                            {{else if (eq model.source 'cw')}}
+                              Apply on Jobbio
+                            {{else if (eq model.source 'da')}}
+                              Apply on Jobbio
+                            {{else}}
+                              Register
+                            {{/if}}
+                          </button>
+                        {{/if}}
+                      {{/if}}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          {{/sticky-container}}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{{/if}}
+{{outlet}}

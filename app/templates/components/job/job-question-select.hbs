@@ -1,0 +1,28 @@
+{{#if isSingle}}
+  <div class="row question select-question">
+    <div class="col-12 col-sm-12">
+      <h4>{{question.text}}</h4>
+    </div>
+    <div class="col-12 col-sm-12">
+      {{#if question.options}}
+        <!-- onchange={{action (action select question.id) value="target.value"}} -->
+        <select name="{{question.id}}[single]">
+          {{#each question.options as |option|}}
+            {{job/job-question-select-single option=option question_answers=question_answers question=question}}
+          {{/each}}
+        </select>
+      {{/if}}
+    </div>
+  </div>
+{{else}}
+  <div class="row question checkbox-question">
+    <div class="col-12 col-sm-12">
+      <h4>{{question.text}}</h4>
+    </div>
+    <div class="col-12 col-sm-12">
+      {{#each question.options as |option|}}
+        {{job/job-question-select-multi option=option question_answers=question_answers question=question}}
+      {{/each}}
+    </div>
+  </div>
+{{/if}}

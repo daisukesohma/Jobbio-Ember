@@ -1,0 +1,54 @@
+{{yield}}
+<div class="{{cssPrefix}}section">
+  {{#if isTopicChannel}}
+    <h4>Channel Feed</h4>
+  {{else}}
+    {{#unless embed}}
+      <h4>Jobs Feed</h4>
+    {{/unless}}
+  {{/if}}
+  <div class="{{cssPrefix}}job-cards">
+    <div class="input-select">
+      <select name="type" id="feed-types" onchange={{action 'setType' value="target.value"}}>
+        <option selected="" value="all">All Job Types</option>
+        {{#each filters.types as |filter|}}
+          <option value="{{filter.type}}">{{filter.type}}</option>
+        {{/each}}
+      </select>
+    </div>
+    {{#if objects}}
+      {{#each objects as |item|}}
+        {{channel/channel-feed-item channel=channel items=objects item=item embed=embed prefixCSS=prefixCSS}}
+      {{/each}}
+      {{#if channel.company}}
+        {{#if isLoading}}
+          {{channel/channel-feed-section-shimmer}}
+        {{else if hasMore}}
+          <div class="{{cssPrefix}}view-more">
+            <a id="channel-view-more" {{action "loadMore"}}>View More</a>
+          </div>
+        {{/if}}
+      {{else}}
+        {{#if hasMore}}
+          {{#infinity-loader
+              infinityModel=objects
+              infinityLoad=(action "loadMore")
+              hideOnInfinity=true}}
+            {{channel/channel-feed-section-shimmer}}
+          {{/infinity-loader}}
+        {{/if}}
+      {{/if}}
+    {{else}}
+      {{#if isLoading}}
+        {{channel/channel-feed-section-shimmer}}
+      {{else}}
+        <br><br>This channel has no content yet
+      {{/if}}
+    {{/if}}
+  </div>
+  {{#if model.channel_feed}}
+    <div class="{{cssPrefix}}view-more">
+      <a id="channelFeedSectionViewMoreCTA" href="#">View More</a>
+    </div>
+  {{/if}}
+</div>

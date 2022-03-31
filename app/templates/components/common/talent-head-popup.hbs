@@ -1,0 +1,16 @@
+<div class="dropdown__container">
+  <div class="container">
+    <div class="row">
+      <div class="dropdown__content col-md-2">
+        <ul class="menu-vertical">
+          <li>{{#link-to 'search.results' invokeAction=(action 'jobSearch') id="talentHeadJobSearch"}}Job Search{{/link-to}}</li>
+          <li><a id="talentHeadCareerAdvice" href="https://blog.jobbio.com/">Career Advice</a></li>
+        </ul>
+      </div>
+      <!--end dropdown content-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container-->
+</div>
+{{yield}}

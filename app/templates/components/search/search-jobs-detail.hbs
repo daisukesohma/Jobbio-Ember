@@ -1,0 +1,50 @@
+{{yield}}
+{{#if jobs}}
+  <div class="col-lg-6 search-job-detail">
+    {{#unless selectedJob}}
+      {{search/search-jobs-detail-shimmer}}
+    {{else}}
+      {{#sticky-container options=myStickyOptions}}
+        <div class="search-job-detail-container">
+          {{#if selectedJob}}
+            <div class="search-job-detail-logo">
+              <div class="logo-wrapper" {{action "goToCompanyChannel" selectedJob}}>
+                {{common/company-logo company=selectedJob.company}}
+              </div>
+            </div>
+          {{/if}}
+          {{search/search-job-banner
+                  model=selectedJob
+                  tracking=tracking
+                  buttons=buttons
+                  jobQuestionsModalOpened=jobQuestionsModalOpened}}
+          {{job/job-main job=selectedJob}}
+          <div class="text-center" style="padding-bottom: 35px;">
+            {{#if loading}}
+              {{paper-progress-linear}}
+            {{else}}
+              {{#each buttons as |button|}}
+                {{#unless (eq button.text 'Save Job')}}
+                  {{#if (eq button.type 'default')}}
+                    <a id="{{button.id}}" href="{{button.href}}" target="{{button.target}}" class="{{button.class}}">
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{else if (eq button.type 'linkTo')}}
+                    {{#link-to button.route (query-params job=selectedJob.id ccuid=tracking.ccuid source=tracking.source app_source=tracking.app_source) id=button.id class=button.class}}
+                    <span class="btn__text">{{button.text}}</span>
+                    {{/link-to}}
+                  {{else if (eq button.type 'onClickAction')}}
+                    <a id="{{button.id}}" class="{{button.class}}" onclick={{action button.action button.actionParam}}>
+                      <span class="btn__text">{{button.text}}</span>
+                    </a>
+                  {{/if}}
+                {{/unless}}
+              {{/each}}
+              {{yield}}
+            {{/if}}
+          </div>
+        </div>
+      {{/sticky-container}}
+    {{/unless}}
+  </div>
+{{/if}}

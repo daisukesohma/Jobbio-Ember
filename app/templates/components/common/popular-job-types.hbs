@@ -1,0 +1,24 @@
+{{yield}}
+<section class="text-center" style="padding-bottom: 4.5em">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8">
+        <h1>Popular Job Types</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="">
+  <div class="container">
+    <div class="row justify-content-around">
+      {{#each popularJobTypes as |row|}}
+        {{#each row as |popularJobType|}}
+          {{common/popular-job-type
+            name=popularJobType.name
+            link=popularJobType.link
+            icon=popularJobType.icon}}
+        {{/each}}
+      {{/each}}
+    </div>
+  </div>
+</section>

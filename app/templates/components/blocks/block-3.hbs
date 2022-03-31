@@ -1,0 +1,95 @@
+{{yield}}
+<style>
+  #section-{{object.id}} .job-cards .job-list-item a.row:hover {
+    text-decoration: none;
+    background: {{object.primary_color}};
+  }
+  @media (min-width: 768px){
+    #section-{{object.id}} .job-list-item .row.boxed.boxed--border:hover {
+      cursor: pointer;
+      border-color: {{object.primary_color}} !important;
+    }
+  }
+  #section-{{object.id}} .view-more a {
+    color: {{object.tertiary_color}};
+  }
+</style>
+<section class="text-center" id="section-{{object.id}}" style="{{style}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="row job-cards">
+          <div class="col-md-8 col-lg-6">
+            <div class="row" style="padding-left: 0px">{{log both}}
+              {{#if object.job_type_filter}}
+                <div class="{{if both 'col-lg-6 mb-3 mb-lg-0' 'col-lg-12'}}">
+                  <div class="input-select">
+                    <select name="type" id="feed-types" onchange={{action 'setType' value="target.value"}}>
+                      <option selected="" value="all">All Job Types</option>
+                      {{#each filters.types as |filter|}}
+                        <option value="{{filter.type}}">{{filter.type}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              {{/if}}
+              {{#if object.job_location_filter}}
+                <div class="{{if both 'col-lg-6 mb-3 mb-lg-0' 'col-lg-12'}}">
+                  <div class="input-select">
+                    <select name="location" id="feed-locations" onchange={{action 'setLocation' value="target.value"}}>
+                      <option selected="" value="all">All Job Locations</option>
+                      {{#each filters.countries as |country|}}
+                        <option value="{{country.location.country_short}}">{{country.location.country}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              {{/if}}
+            </div>
+            {{#if objects}}
+              {{#each objects as |item|}}
+                <div class="job-list-item">
+                  <a href="{{link}}/companies/{{item.company.slug}}/jobs/{{item.slug}}?source={{item.company.slug}}_job" class="row boxed boxed--border">
+                    {{common/company-logo company=item.company}}
+                    <div class="details">
+                      <div class="job-name">
+                        <h4>{{item.title}}</h4>
+                      </div>
+                      <ul class="list-inline">
+                        <li><i class="icon icon--sm icon-Map-Marker"></i>{{if item.location.city item.location.city item.location.address}}</li>
+                      </ul>
+                    </div>
+                  </a>
+                </div>
+              {{/each}}
+              {{#if channel.company}}
+                {{#if isLoading}}
+                  {{blocks/block-3-shimmer}}
+                {{else if hasMore}}
+                  <div class="{{cssPrefix}}view-more" style="padding-top: 15px; padding-bottom: 15px;">
+                    <a href="javascript:;" id="channel-view-more" {{action "loadMore"}}>View More</a>
+                  </div>
+                {{/if}}
+              {{else}}
+                {{#if hasMore}}
+                  {{#infinity-loader
+                          infinityModel=objects
+                          infinityLoad=(action "loadMore")
+                          hideOnInfinity=true}}
+                    {{spinkit-circle}}
+                  {{/infinity-loader}}
+                {{/if}}
+              {{/if}}
+            {{else}}
+              {{#if isLoading}}
+                {{blocks/block-3-shimmer}}
+              {{else}}
+                <br><br>This channel has no content yet
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

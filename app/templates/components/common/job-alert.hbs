@@ -1,0 +1,70 @@
+{{yield}}
+<div style="padding-top: 15px; font-size: 12px;" class="col-lg-3 leftcol">
+  <div class="section">
+    <!-- Starts: job alerts-->
+    <div class="section modal-instance" style="margin-bottom: 10px;width:100%" id="job-alert">
+      <div class="feature feature-1 min-height-auto boxed boxed--border popularcompanies" id="job-alerts" style="background-color: #f8f8f8; border: 1px solid #ececec;">
+        <p id="alert_title" style="font-size:20px;text-align:center;">
+          <i class="icon--sm icon-Bell" style="font-size:15px;border-radius:50%;padding:10px;font-weight:400;"></i>
+          Job Alert
+        </p><br>
+        <p id="alert_subtitle" style="text-align:center;">Create Job Alerts</p><br>
+        <button id="alert_cta" type="submit" class="btn btn--primary type--uppercase modal-trigger">Create Job Alert</button>
+      </div>
+
+      <div class="modal-container">
+
+        <div class="modal-content section-modal">
+          <section class="unpad ">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 col-lg-offset-3 col-md-offset-3 col-sm-12">
+                  <div class="feature feature-1">
+                    <div class="feature__body boxed boxed--lg boxed--border">
+                      <div class="modal-close modal-close-cross" id="close-modal"></div>
+                      <div class="text-block">
+                        <p style="font-size:20px;text-align:center;" id="alertTitle">
+                          Job Alert
+                          <i class="icon icon--sm icon-Bell" style="font-size:15px;color:white;border-radius:50%;padding:10px;font-weight:400;"></i>
+                        </p>
+                        <p style="padding-top:30px;font-weight:400;text-align:center;" id="alertSubtitle">Create Job Alert</p>
+                      </div>
+                      <form id="alertForm">
+                        <div class="row" id="alertBox">
+                          <div class="col-md-12">
+                            <label style="font-size:14px;"><b>Job Type:</b></label>
+                            <div class="checkbox-wrapper boxed--border" id="alert_job_type">
+
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <label style="font-size:14px;"><b>Location:</b></label>
+                            <input type="text" name="location" id="autocomplete" placeholder="Location" />
+                          </div>
+                          <div class="col-md-12">
+                            <label style="font-size:14px;"><b>Email Address:</b></label>
+                            <input type="email" name="email" id="alert_email" placeholder="Email Address"
+                                   class="validate-required" />
+                          </div>
+                          <div class="col-md-12" style="padding-top:30px;">
+                            <button type="submit" id="createAlert" class="btn btn--primary type--uppercase"></button>
+                          </div>
+                        </div>
+                      </form>
+                      <!--end of row-->
+                    </div>
+                  </div>
+                  <!--end feature-->
+                </div>
+              </div>
+              <!--end of row-->
+            </div>
+            <!--end of container-->
+          </section>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

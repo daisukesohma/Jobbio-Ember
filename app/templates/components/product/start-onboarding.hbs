@@ -1,0 +1,135 @@
+{{yield}}
+<section style="height: 100vh" class="imageblock feature-large">
+  <div class="background-image-holder position-fixed" style="background-image:url('{{backgroundImageUrl}}');" data-overlay="{{backgroundOverlay}}">
+    <img alt="image" src="{{backgroundImageUrl}}">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row justify-content-md-center">
+          <div class="col-lg-11">
+            {{#if package}}
+              <div class="pricing pricing-2 boxed boxed--lg row no-gutters">
+                {{#if package.package_page_details.0.secondary_text}}
+                  <div class="col-lg-12 col-xl-12">
+                    <div class="testimonial testimonial-2">
+                      <div class="testimonial__body boxed">
+                        <p>{{package.package_page_details.0.secondary_text}}</p>
+                      </div>
+                    </div>
+                  </div>
+                {{else}}
+                  <div class="col-xl-12">
+                    {{#if package.image}}
+                      <img class="application_logo" src="{{package.image}}">
+                    {{else if package.hero_title}}
+                      <h1 class="application_count_strap" style="margin-bottom: 20px; margin-top: 0px">{{package.hero_title}}</h1>
+                    {{else}}
+                      <img class="application_logo" src="{{logo}}">
+                    {{/if}}
+                  </div>
+                  <div class="col-xl-12">
+                    <ul>
+                      {{#each package.package_page_details.0.package_info as |info|}}
+                        <li><span class="checkmark bg--primary-1"></span><span>{{info.text}}</span></li>
+                      {{/each}}
+                    </ul>
+                  </div>
+                {{/if}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="boxed boxed--lg boxed--border">
+          <h1>{{package.form_title}}</h1>
+          <p class="lead">{{package.package_page_details.0.subtitle}}</p>
+          <hr class="short">
+          <form class="form-email row">
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">business</i>
+                {{input id="onboardingCompanyName" type="text" value=model.company_name placeholder="Company Name"}}
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">person</i>
+                {{input id="onboardingFirstName" type="text" value=model.first_name placeholder="First Name"}}
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">person</i>
+                {{input id="onboardingLastName" type="text" value=model.last_name placeholder="Last Name"}}
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">email</i>
+                {{input id="onboardingEmail" type="text" value=model.email placeholder="Email"}}
+                {{#if errors.email}}
+                  <label class="registration-validation-error">{{errors.email}}</label>
+                {{/if}}
+              </div>
+            </div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon {{if focused 'password-icon-active'}}">
+                <a tabindex="-1" href="javascript:void(0)" id="onboardingPasswordVisibility" {{action 'passwordVisibility' visible}}>
+                  <i class="cursor-hand material-icons">visibility</i>
+                </a>
+                {{input id="registerCompanyPassword" focus-in=(action "focus" true) focus-out=(action "focus" false) type=visible name="password" value=model.password placeholder="Password"}}
+                {{#unless errors.password}}
+                  <small class="text-muted password-subtitle">
+                    Password must contain a minimum of 6 characters with at least 1 letter and 1 number
+                  </small>
+                {{/unless}}
+                {{#if errors.password}}
+                  <label class="registration-validation-error">{{errors.password}}</label>
+                {{/if}}
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">add_location</i>
+                {{g-autocomplete name="add_ress" value=address on-select=(action "didUpdatePlace") id='add_ress' class='form-control' on-select-error=(action "invalidUserSelection")}}
+                {{#if errors.address}}
+                  <label class="registration-validation-error">
+                    {{errors.address}}
+                  </label>
+                {{/if}}
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-12 col-12">
+              <div class="input-icon">
+                <i class="material-icons">phone</i>
+                {{input id="onboardingPhone" type="text" value=model.phone placeholder="Phone"}}
+                {{#if errors.phone}}
+                  <label class="registration-validation-error">{{errors.phone}}</label>
+                {{/if}}
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-12">
+              <div class="input-checkbox">
+                <input type="checkbox" name="agree" id="input-assigned-0" {{action 'didAgree' on="change"}}>
+                <label for="input-assigned-0"></label>
+              </div>
+              <span class="type--fine-print">I accept Jobbio's {{#link-to 'terms' target='_blank'}}Terms &amp; Conditions{{/link-to}} and {{#link-to 'privacy-policy' target='_blank'}}Privacy Policy{{/link-to}}</span>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-12 col-12 mt--1">
+              <button id="onboardingGetStarted" type="submit" {{action 'startOnboarding'}} disabled={{linkDisabled}} class="btn btn--primary type--uppercase onboarding-get-started">{{submitButtonText}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

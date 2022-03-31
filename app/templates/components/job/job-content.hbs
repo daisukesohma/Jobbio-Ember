@@ -1,0 +1,63 @@
+{{#if isText}}
+  <!-- Starts: row -->
+  <div class="row boxed boxed--border post post-text">
+    {{#if channel.is_member}}
+      <form {{action 'updateContent' content on='submit'}}>
+        <button id="jobContentTextRemoveContent{{content.id}}" type="button" class="close" onclick={{action "removeContent" item items}}>&times;</button>
+        {{paper-input id=(concat "job-content-title-" content.id) label="Title" value=content.title onChange=(action (mut content.title))}}
+        {{tinymce-editor options=options value=content.text onValueChanged=(action (mut content.text))}}
+        <br>
+        {{#if saving}}
+          {{paper-progress-linear}}
+        {{else}}
+          <button id="jobContentTextSubmit{{content.id}}" type="submit" class="btn btn--primary">Update</button>
+        {{/if}}
+      </form>
+    {{else}}
+      <h4>{{{content.title}}}</h4>
+      <p>{{{content.text}}}</p>
+    {{/if}}
+  </div>
+  <!-- End: row -->
+{{/if}}
+{{#if isVideo}}
+  <!-- Starts: row -->
+  <div class="{{cssPrefix}}row {{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}post {{cssPrefix}}post-video">
+    {{#if channel.is_member}}
+      <button id="jobContentVideoRemoveContent{{content.id}}" type="button" class="close" onclick={{action "removeContent" item items}}>&times;</button>
+    {{/if}}
+    <!-- Starts : video Block -->
+    <div class="{{cssPrefix}}video-cover {{cssPrefix}}border--round">
+      <iframe src="{{{content.video}}}" allowfullscreen="allowfullscreen" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    </div>
+    <p>{{{content.text}}}</p>
+    <!-- End : video Block -->
+  </div>
+  <!-- End: row -->
+{{/if}}
+{{#if isImage}}
+  <!-- Starts: row -->
+  <div class="{{cssPrefix}}row {{cssPrefix}}boxed {{cssPrefix}}boxed--border {{cssPrefix}}post {{cssPrefix}}post-image">
+    {{#if channel.is_member}}
+      <button id="jobContentImageRemoveContent{{content.id}}" type="button" class="close" onclick={{action "removeContent" item items}}>&times;</button>
+    {{/if}}
+    <!-- Starts : Image Block -->
+    <div class="{{cssPrefix}}project-thumb {{cssPrefix}}hover-element {{cssPrefix}}border--round hover--active">
+      <a id="jobContentImage{{content.id}}" style="cursor: default">
+        <div class="{{cssPrefix}}hover-element__initial">
+          <div class="{{cssPrefix}}background-image-holder" style="background: url('{{{content.image}}}'); opacity: 1;">
+            <img alt="background" src="{{{content.image}}}">
+          </div>
+        </div>
+        <div class="hover-element__reveal" data-scrim-top="5">
+          <div class="project-thumb__title">
+            <h4>{{{content.title}}}</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- End : Image Block -->
+    <p class="mt--1">{{{content.text}}}</p>
+  </div>
+  <!-- End: row -->
+{{/if}}

@@ -1,0 +1,28 @@
+{{yield}}
+<section class="text-center bg--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8">
+        <h1>All Job Types</h1>
+        <p class="lead">Can't find what you are looking for, try our <a href="/search">Advanced Search</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg--secondary">
+  <div class="container">
+    <div class="row" style="text-align: center;">
+      {{#each allJobTypes as |column|}}
+        <div class="col-md-6 col-lg-{{columns}}">
+          <div class="feature feature-6">
+            <ul>
+              {{#each column as |allJobType|}}
+                <li><a href="javascript:void(0);" onclick={{action 'searchJobType' allJobType.name}} style="cursor: pointer;">{{allJobType.name}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

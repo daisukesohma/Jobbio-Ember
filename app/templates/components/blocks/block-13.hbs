@@ -1,0 +1,32 @@
+{{yield}}
+<style>
+  #section-{{object.id}} .process-1:before {
+    background: {{object.primary_color}};
+  }
+  #section-{{object.id}} .process__item:after {
+    border-color: {{object.primary_color}};
+    background: {{object.background_color}};
+  }
+  #section-{{object.id}} .customTitleColorTimeLine {
+    color: {{object.text_color}} !important;
+  }
+  #section-{{object.id}} .customTextColorTimeLine {
+    color: {{object.tertiary_color}} !important;
+  }
+</style>
+<section style="{{style}}" id="section-{{object.id}}">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="process-1">
+          {{#each object.block_content_entry as |entry|}}
+            <div class="process__item">
+              <h3 class="customTitleColorTimeLine">{{entry.title}}</h3>
+              <p class="customTextColorTimeLine">{{entry.text}}</p>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
